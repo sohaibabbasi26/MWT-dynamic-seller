@@ -10,6 +10,11 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        blueBack: "#172243",
+        orangeBack: "#F68323"
+      },
+      fontFamily: {
+        redhat: ['Red Hat Display', 'sans-serif'], // Add your font here
       },
     },
   },
