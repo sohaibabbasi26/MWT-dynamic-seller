@@ -6,26 +6,22 @@ import { useState,useEffect } from "react";
 
 const AdminPage = () => {
 
-    const [heroData, setHeroData] = useState(() => {
-        const savedData = localStorage.getItem("heroData");
-        return savedData
-            ? JSON.parse(savedData)
-            : {
-                  title: "Performance Overview",
-                  description:
-                      "Our company’s achievements in sales, client satisfaction, and market strategies, while also identifying areas for improvement and future opportunities.",
-                  location: "3487 S UTAH ST S Arlington, VA 22206",
-                  visitors: "5,296",
-                  lastUpdated: "December 20, 2024",
-                  images: ["/image1.png", "/image2.png", "/image3.png"],
-              };
+    const [heroData, setHeroData] = useState({
+        title: "Performance Overview",
+        description:
+            "Our company’s achievements in sales, client satisfaction, and market strategies, while also identifying areas for improvement and future opportunities.",
+        location: "3487 S UTAH ST S Arlington, VA 22206",
+        visitors: "5,296",
+        lastUpdated: "December 20, 2024",
+        images: ["/image1.png", "/image2.png", "/image3.png"],
     });
 
     useEffect(() => {
-        console.log("[HERO DATA]:",heroData);
-        localStorage.setItem("heroData", JSON.stringify(heroData));
-    }, [heroData]);
-
+        const savedData = typeof window !== "undefined" ? localStorage.getItem("heroData") : null;
+        if (savedData) {
+            setHeroData(JSON.parse(savedData));
+        }
+    }, []);
     // const { heroData, setHeroData } = useContext(HeroContext);
 
     const handleChange = (e) => {
