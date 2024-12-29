@@ -2,10 +2,11 @@
 
 import { useContext } from "react";
 import { HeroContext } from "../context/HeroContxt";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const AdminPage = () => {
 
+    const [submitPressed, setSubmitPressed] = useState(false);
     const [heroData, setHeroData] = useState({
         title: "Performance Overview",
         description:
@@ -17,12 +18,20 @@ const AdminPage = () => {
     });
 
     useEffect(() => {
-        const savedData = typeof window !== "undefined" ? localStorage.getItem("heroData") : null;
-        if (savedData) {
-            setHeroData(JSON.parse(savedData));
+        // Load data from localStorage only once
+        if (typeof window !== "undefined") {
+            const savedData = localStorage.getItem("heroData");
+            if (savedData) {
+                setHeroData(JSON.parse(savedData));
+                console.log("[saved data]:", JSON.parse(savedData));
+            }
         }
     }, []);
-    // const { heroData, setHeroData } = useContext(HeroContext);
+
+    useEffect(() => {
+        // Log heroData changes
+        console.log("[HERO]:", heroData);
+    }, [heroData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,6 +58,13 @@ const AdminPage = () => {
             }));
         } else {
             alert("Please fill the last image field before adding a new one.");
+        }
+    };
+
+    const handleSubmit = () => {
+        if (typeof window !== "undefined") {
+            localStorage.setItem("heroData", JSON.stringify(heroData));
+            console.log("Data saved to localStorage:", heroData);
         }
     };
 
@@ -108,7 +124,7 @@ const AdminPage = () => {
                 </div>
                 <div>
                     <label className="block font-semibold text-black">Slideshow Images</label>
-                    {heroData.images.map((image, index) => (
+                    {heroData?.images?.map((image, index) => (
                         <div key={index} className="flex items-center space-x-2 mb-2">
                             <input
                                 type="text"
@@ -123,6 +139,13 @@ const AdminPage = () => {
                         Add Image
                     </button>
                 </div>
+
+                <button
+                    onClick={handleSubmit}
+                    className="px-4 py-2 bg-green-500 text-white rounded mt-4"
+                >
+                    Save Changes
+                </button>
             </div>
         </div>
     );

@@ -17,7 +17,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
         const savedData = localStorage.getItem("heroData");
         if (savedData) {
             setHeroData(JSON.parse(savedData));
-        }
+        }   
     }, []);
 
 
