@@ -35,39 +35,45 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                                 {heroData.description}
                             </p>
 
-                            <div className="bg-[rgba(255,255,255,0.1)] p-4 w-[70%] mt-5 rounded-lg border-[1px] border-orangeBack max-sm:w-[95%]">
-                                <div className="flex gap-2 items-start">
-                                    <div>
-                                        <Image className="pt-1" src="/icons/location.png" width={12} height={12} alt="location" />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-[16px] font-semibold font-redhat">Location</h2>
-                                        <p className="text-[14px] font-redhat">{heroData.location}</p>
-                                    </div>
-                                </div>
+                            {heroData.location ? (
+                                <>
+                                    <div className="bg-[rgba(255,255,255,0.1)] p-4 w-[70%] mt-5 rounded-lg border-[1px] border-orangeBack max-sm:w-[95%]">
+                                        <div className="flex gap-2 items-start">
+                                            <div>
+                                                <Image className="pt-1" src="/icons/location.png" width={12} height={12} alt="location" />
+                                            </div>
+                                            <div>
+                                                <h2 className="text-[16px] font-semibold font-redhat">Location</h2>
+                                                <p className="text-[14px] font-redhat">{heroData.location}</p>
+                                            </div>
+                                        </div>
 
-                                <div className="flex justify-start items-center gap-3 mt-4">
-                                    <div className="flex gap-2 items-start">
-                                        <div>
-                                            <Image className="pt-1" src="/icons/User.png" width={22} height={22} alt="location" />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-[16px] font-semibold font-redhat">Visitors</h2>
-                                            <p className="text-[14px] font-redhat">{heroData.visitors}</p>
-                                        </div>
-                                    </div>
+                                        <div className="flex justify-start items-center gap-3 mt-4">
+                                            <div className="flex gap-2 items-start">
+                                                <div>
+                                                    <Image className="pt-1" src="/icons/User.png" width={22} height={22} alt="location" />
+                                                </div>
+                                                <div>
+                                                    <h2 className="text-[16px] font-semibold font-redhat">Visitors</h2>
+                                                    <p className="text-[14px] font-redhat">{heroData.visitors}</p>
+                                                </div>
+                                            </div>
 
-                                    <div className="flex gap-2 items-start">
-                                        <div>
-                                            <Image className="pt-1" src="/icons/User.png" width={22} height={22} alt="location" />
-                                        </div>
-                                        <div>
-                                            <h2 className="text-[16px] font-semibold font-redhat">Last Updated</h2>
-                                            <p className="text-[14px] font-redhat">{heroData.lastUpdated}</p>
+                                            <div className="flex gap-2 items-start">
+                                                <div>
+                                                    <Image className="pt-1" src="/icons/User.png" width={22} height={22} alt="location" />
+                                                </div>
+                                                <div>
+                                                    <h2 className="text-[16px] font-semibold font-redhat">Last Updated</h2>
+                                                    <p className="text-[14px] font-redhat">{heroData.lastUpdated}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </>
+                            ) : (
+                                <></>
+                            )}
                         </div>
 
 
