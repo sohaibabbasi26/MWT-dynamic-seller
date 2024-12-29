@@ -118,7 +118,7 @@ const AdminPage = () => {
                                 type="text"
                                 value={image}
                                 onChange={(e) => handleImageChange(index, e.target.value)}
-                                className="w-full p-2 border border-gray-300 rounded"
+                                className="w-full p-2 border border-gray-300 rounded text-black"
                                 placeholder={`Image ${index + 1}`}
                             />
                         </div>
