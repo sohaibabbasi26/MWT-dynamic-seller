@@ -18,7 +18,6 @@ const AdminPage = () => {
     });
 
     useEffect(() => {
-        // Load data from localStorage only once
         if (typeof window !== "undefined") {
             const savedData = localStorage.getItem("heroData");
             if (savedData) {
@@ -29,7 +28,6 @@ const AdminPage = () => {
     }, []);
 
     useEffect(() => {
-        // Log heroData changes
         console.log("[HERO]:", heroData);
     }, [heroData]);
 

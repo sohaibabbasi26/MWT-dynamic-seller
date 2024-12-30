@@ -13,7 +13,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="h-[12vh] bg-[#172243] w-full flex items-center justify-around fixed  ">
+            <div className="h-[12vh] bg-[#172243] w-full flex items-center justify-around fixed z-50 ">
                 <Image src="/MWT_logo.png" height={130} width={130} alt="Logo" />
 
                 <div className="max-sm:hidden ">
@@ -25,7 +25,7 @@ const Navbar = () => {
                     </ul>
                 </div>
 
-                <button className="bg-[#F68323] px-6 py-2 rounded-md text-sm text-[#172243] max-sm:hidden font-redhat">Contact</button>
+                <button className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] max-sm:hidden font-redhat">Contact</button>
 
                 <div
                     className="sm:hidden flex items-center cursor-pointer"
