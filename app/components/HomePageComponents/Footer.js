@@ -41,7 +41,7 @@ const Footer = () => {
                             </div>
                         </div>
  
-                        <div className="max-sm:bg-[rgba(255,255,255,0.1)] rounded-lg max-sm:border-[1px] max-sm:border-orangeBack flex gap-4 items-center w-full max-sm:w-[70%] max-sm:py-[1rem] max-sm:mt-[2    rem] justify-center max-sm:flex-col">
+                        <div className="max-sm:bg-[rgba(255,255,255,0.1)] rounded-lg max-sm:border-[1px] max-sm:border-orangeBack flex gap-4 items-center w-full max-sm:w-[70%] max-sm:py-[1rem] max-sm:mt-[2rem] justify-center max-sm:flex-col">
                             <div>
                                 <Image className="pt-1 max-sm:h-[50px] max-sm:w-[30px]" src="/icons/location.png" width={25} height={42} alt="location" />
                             </div>

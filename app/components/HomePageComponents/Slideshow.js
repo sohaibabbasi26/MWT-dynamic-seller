@@ -25,7 +25,7 @@ const Slideshow = ({images}) => {
             autoplay={{
                 delay: 2000,
                 disableOnInteraction: false,
-            }}
+            }}w
             loop={true}
             speed={800}
             loopFillGroupWithBlank={true} 

@@ -93,7 +93,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                 </div>
             )}
 
-            <Footer />
+            
         </>
     )
 }
