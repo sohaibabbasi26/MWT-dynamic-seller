@@ -9,17 +9,10 @@ import Image from "next/image";
 import { Pagination, Navigation, Autoplay, EffectFade } from "swiper/modules";
 
 const Slideshow = ({images}) => {
-    // const images = [
-    //     "/image1.png",
-    //     "/image2.png",
-    //     "/image3.png",
-    // ];
 
     return (
         <Swiper
             pagination={{ clickable: true }}
-            // navigation={true}
-            // effect="fade"
             modules={[Pagination, Navigation, Autoplay]}
             className="mySwiper rounded-2xl"
             autoplay={{

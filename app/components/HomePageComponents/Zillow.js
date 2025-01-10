@@ -11,7 +11,7 @@ const Zillow = () => {
                     <span className="text-orangeBack"> Zillow-3487 S Utah St S </span> by The Mike Webb Team
                 </p>
 
-                <button className="py-3 px-6 bg-blueBack rounded-xl font-redhat">Visit Zillow</button>
+                <button className="py-3 px-6 bg-blueBack rounded-xl font-redhat max-sm:w-[90%]">Visit Zillow</button>
             </div>
         </>
     )
