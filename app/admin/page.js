@@ -137,10 +137,10 @@ const AdminPage = () => {
             if (data?.status === 200) {
                 setFirstResponse(true);
                 console.log("[data?.listing?.listing_id]:", data?.listing?.listing_id);
-                setListingUrl(`https://mwt-backend.onrender.com/home/${data?.listing?.listing_id}`);
+                setListingUrl(`https://dynamic-seller.vercel.app/home/${data?.listing?.listing_id}`);
                 setListingId(data?.listing?.listing_id);
             }
-            return;
+            return; 
         } catch (err) {
             console.log("[ERROR]:", err);
             return err;
