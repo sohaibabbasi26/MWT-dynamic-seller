@@ -135,7 +135,7 @@ const IndividualListing = () => {
             if (data?.status === 200) {
                 setFirstResponse(true);
                 console.log("[data?.listing?.listing_id]:", data?.listing?.listing_id);
-                setListingUrl(`http://localhost:3000/home/${id}`);
+                setListingUrl(`https://mwt-backend.onrender.com/home/${id}`);
                 setListingId(data?.listing?.listing_id);
             }
             return;
