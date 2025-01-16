@@ -9,7 +9,7 @@ import Image from "next/image";
 import ReviewCard from "./ReviewCard";
 
 
-const Testimonials = () => {
+const Testimonials = ({data}) => {
 
     const reviewsDummyArray = [
         {
@@ -45,11 +45,11 @@ const Testimonials = () => {
                         }}
                         loop={true}
                         speed={800}
-                        loopFillGroupWithBlank={true}
+                        loopFillGroupWithBlank={true}   
                     >
-                        {reviewsDummyArray?.map((src, index) => (
+                        {data?.reviews?.map((src, index) => (
                             <SwiperSlide key={index} className="flex justify-center w-full overflow-hidden items-center rounded-2xl">
-                                <ReviewCard rating={src.rating} name={src.name} description={src.description} role={src.role} />
+                                <ReviewCard rating={src.rating} name={src.name} description={src.comment} role={src.role} />
                             </SwiperSlide>
                         ))}
                     </Swiper>

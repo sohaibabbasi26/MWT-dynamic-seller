@@ -338,7 +338,7 @@ const HomePage = () => {
         <>
              <HeroSection
                 title={data?.location || "Default Title"}
-                description={data?.contact_form_header || "Default Description"}
+                description={data?.description || "Default Description"}
                 location={data?.location || "Default Location"}
                 visitors={data?.visitors || 0}
                 lastUpdated={data?.createdAt || "N/A"}
@@ -375,9 +375,9 @@ const HomePage = () => {
                 videoUrl={data?.uploaded_video_two}
             />
 
-            <ListingDetails /> 
+            <ListingDetails features={data?.features} contactFormHeader={data?.contact_form_header} /> 
 
-            <MarketingCompaign />
+            <MarketingCompaign uploaded_images={data?.uploaded_images} />
 
             <DynamicVideoContent
                 isLeftFlow={false}
@@ -389,7 +389,7 @@ const HomePage = () => {
 
             <ContactForm />
 
-            <Testimonials />
+            <Testimonials data={data} />
 
              <Footer /> 
         </>

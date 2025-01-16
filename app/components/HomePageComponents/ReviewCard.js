@@ -2,6 +2,7 @@ import Image from "next/image";
 import DemoDp from "../../../public/demoDp.svg";
 import Qoutes from "../../../public/qoutes.svg";
 import StarRating from "./StarRating";
+import Avatar from "../../../public/avatar.png"
 
 
 const ReviewCard = ({ role, name, description, rating }) => {
@@ -12,12 +13,12 @@ const ReviewCard = ({ role, name, description, rating }) => {
                 <div className="h-[20%] w-full flex items-center gap-2 justify-between">
                     <div className="flex gap-2">
                         <div className="h-[50px] w-[50px] rounded-full">
-                            <Image className="h-full w-full" src={DemoDp} height={30} width={30} />
+                            <Image className="h-full w-full rounded-full bg-orangeBack" src={Avatar} height={30} width={30} />
                         </div>
                         <div className="flex flex-col">
                             <p className="font-semibold">{name}</p>
                             <span className="text-sm">
-                                {role}
+                                {role || "Client"}
                             </span>
                         </div>
                     </div>

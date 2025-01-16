@@ -5,22 +5,12 @@ import { HeroContext } from "../context/HeroContxt";
 import { useState, useEffect } from "react";
 
 const AdminPage = () => {
-
-    // const [submitPressed, setSubmitPressed] = useState(false);
-    // const [heroData, setHeroData] = useState({
-    //     title: "Performance Overview",
-    //     description:
-    //         "Our company’s achievements in sales, client satisfaction, and market strategies, while also identifying areas for improvement and future opportunities.",
-    //     location: "3487 S UTAH ST S Arlington, VA 22206",
-    //     visitors: "5,296",
-    //     lastUpdated: "December 20, 2024",
-    //     images: ["/image1.png", "/image2.png", "/image3.png"],
-    // });
     const [listingUrl, setListingUrl] = useState('');
     const [firstResponse, setFirstResponse] = useState(false);
     const [secondResponse, setSecondResponse] = useState(false);
     const [thirdResponse, setThirdResponse] = useState(false);
     const [listingId, setListingId] = useState(false);
+
 
     const [formData, setFormData] = useState({
         location: "",
@@ -30,15 +20,40 @@ const AdminPage = () => {
         listing_engagements: 0,
         interested_buyers: 0,
         saves: 0,
-        features: { beds: 0, baths: 0, square_fit: 0, address: "", pricing: "", discountPercentage: "" },
+        features: { beds: 0, baths: 0, square_fit: 0, address: "", pricing: "", discountPercentage: "", city: "" },
         socialCampaignsLinks: { fb: "", ig: "", email_blast: "" },
         contact_form_header: "",
         reviews: [{ name: "", rating: 0, comment: "" }],
-
-        // uploaded_video_one: null,
-        // uploaded_video_two: null,
-        // uploaded_images: [],
+        yt_link: "",
+        address: "",
     });
+
+    const handleReviewChange = (index, field, value) => {
+        const updatedReviews = [...formData.reviews];
+        updatedReviews[index][field] = value;
+        setFormData((prev) => ({
+            ...prev,
+            reviews: updatedReviews,
+        }));
+    };
+
+    const addReview = () => {
+        setFormData((prev) => ({
+            ...prev,
+            reviews: [...prev.reviews, { name: "", rating: 0, comment: "" }],
+        }));
+    };
+
+    const removeReview = (index) => {
+        const updatedReviews = [...formData.reviews];
+        updatedReviews.splice(index, 1);
+        setFormData((prev) => ({
+            ...prev,
+            reviews: updatedReviews,
+        }));
+    };
+
+    const [uploadedImages, setUploadedImages] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -70,17 +85,47 @@ const AdminPage = () => {
     };
 
     const handleImageUpload = (e) => {
-        const files = Array.from(e.target.files);
-        setFormData((prev) => ({
-            ...prev,
-            uploaded_images: [...prev.uploaded_images, ...files],
-        }));
+        const files = Array.from(e.target.files).slice(0, 5);
+        setUploadedImages(files);
     };
+
+    const handleSubmitImages = async () => {
+        if (uploadedImages.length === 0) {
+            console.error('No images selected for upload');
+            return;
+        }
+
+        const formDataToSend = new FormData();
+        formDataToSend.append('listing_id', listingId);
+
+        uploadedImages.forEach((file, index) => {
+            formDataToSend.append(`images[${index}]`, file);
+        });
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post-listing-images`, {
+                method: 'POST',
+                body: formDataToSend,
+            });
+
+            const data = await response.json();
+            console.log("[DATA FROM THE RESPONSE]:", data);
+
+            if (response.ok) {
+                alert('Images uploaded successfully!');
+            } else {
+                console.error("[ERROR IN RESPONSE]:", data.message);
+            }
+        } catch (err) {
+            console.error("[ERROR]:", err);
+        }
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await fetch(`http://localhost:4000/create-listing`, {
+            const result = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/create-listing`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,21 +152,21 @@ const AdminPage = () => {
         const formDataToSend = new FormData();
 
         if (listingId) {
-            formDataToSend.append('listing_id', listingId); 
+            formDataToSend.append('listing_id', listingId);
         }
         if (formData.uploaded_video_one) {
-            formDataToSend.append('file', formData.uploaded_video_one); 
+            formDataToSend.append('file', formData.uploaded_video_one);
         } else {
             console.error('No file selected for upload');
-            return; 
+            return;
         }
 
         for (let [key, value] of formDataToSend.entries()) {
             console.log(`${key}: ${value}`);
         }
 
-        const response = await fetch(`http://localhost:4000/upload-first-video`, {
-            method: 'PUT', 
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/upload-first-video`, {
+            method: 'PUT',
             body: formDataToSend,
         });
 
@@ -136,58 +181,45 @@ const AdminPage = () => {
         return;
     }
 
+    const handleSecondVideoUpload = async () => {
 
+        const formDataToSend = new FormData();
 
+        if (listingId) {
+            formDataToSend.append('listing_id', listingId);
+        }
+        if (formData.uploaded_video_two) {
+            formDataToSend.append('file', formData.uploaded_video_two);
+        } else {
+            console.error('No file selected for upload');
+            return;
+        }
 
-    // useEffect(() => {
-    //     if (typeof window !== "undefined") {
-    //         const savedData = localStorage.getItem("heroData");
-    //         if (savedData) {
-    //             setHeroData(JSON.parse(savedData));
-    //             console.log("[saved data]:", JSON.parse(savedData));
-    //         }
-    //     }
-    // }, []);
+        for (let [key, value] of formDataToSend.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/upload-second-video`, {
+            method: 'PUT',
+            body: formDataToSend,
+        });
+
+        const data = await response.json();
+        console.log("[DATA FROM THE RESPONSE]:", data);
+
+        if (response.ok) {
+            setThirdResponse(true);
+        } else {
+            console.error("[ERROR IN RESPONSE]:", data.message);
+        }
+        return;
+    }
 
     useEffect(() => {
         console.log("[FORM DATA]:", formData);
         console.log("[FIRST RESPONSE RECEIVED]:", firstResponse);
     }, [formData, firstResponse]);
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setHeroData((prev) => ({
-    //         ...prev,
-    //         [name]: value,
-    //     }));
-    // };
-
-    // const handleImageChange = (index, value) => {
-    //     const updatedImages = [...heroData.images];
-    //     updatedImages[index] = value;
-    //     setHeroData((prev) => ({
-    //         ...prev,
-    //         images: updatedImages,
-    //     }));
-    // };
-
-    // const addImageField = () => {
-    //     if (heroData.images.length === 0 || heroData.images[heroData.images.length - 1] !== "") {
-    //         setHeroData((prev) => ({
-    //             ...prev,
-    //             images: [...prev.images, ""],
-    //         }));
-    //     } else {
-    //         alert("Please fill the last image field before adding a new one.");
-    //     }
-    // };
-
-    // const handleSubmit = () => {
-    //     if (typeof window !== "undefined") {
-    //         localStorage.setItem("heroData", JSON.stringify(heroData));
-    //         console.log("Data saved to localStorage:", heroData);
-    //     }
-    // };
 
     return (
         <div className="p-6">
@@ -231,6 +263,56 @@ const AdminPage = () => {
                         name="views"
                         placeholder="Views"
                         value={formData.views}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Saves</h3>
+                    <input
+                        type="number"
+                        name="saves"
+                        placeholder="No of Saves"
+                        value={formData.saves}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Youtube video url</h3>
+                    <input
+                        type="url"
+                        name="yt_link"
+                        placeholder="Youtube Video URL"
+                        value={formData.yt_link}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Listing Engagements</h3>
+                    <input
+                        type="number"
+                        name="listing_engagements"
+                        placeholder="Listing Engagements"
+                        value={formData.listing_engagements}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Interested Buyers</h3>
+                    <input
+                        type="number"
+                        name="interested_buyers"
+                        placeholder="Number of Interested buyers"
+                        value={formData.interested_buyers}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Address of the listing</h3>
+                    <input
+                        type="text"
+                        name="address"
+                        placeholder="Enter the locality of the listing"
+                        value={formData.address}
                         onChange={handleChange}
                         className="block w-full p-2 border rounded text-black"
                     />
@@ -280,6 +362,69 @@ const AdminPage = () => {
                             onChange={(e) => handleFeatureChange(e, "discountPercentage")}
                             className="block w-full p-2 border rounded text-black"
                         />
+
+                        <h3 className="text-black font-semibold">City name</h3>
+                        <input
+                            type="text"
+                            placeholder="City"
+                            value={formData.features.city}
+                            onChange={(e) => handleFeatureChange(e, "city")}
+                            className="block w-full p-2 border rounded text-black"
+                        />
+
+                        <div className="space-y-3">
+                            <h3 className="text-lg font-semibold text-black">Reviews</h3>
+                            {formData.reviews.map((review, index) => (
+                                <div key={index} className="border p-4 rounded mb-4">
+                                    <h4 className="text-md font-semibold text-black">
+                                        Review {index + 1}
+                                    </h4>
+                                    <label className="text-black">Name</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Name"
+                                        value={review.name}
+                                        onChange={(e) => handleReviewChange(index, "name", e.target.value)}
+                                        className="block w-full p-2 border rounded text-black mb-2"
+                                    />
+                                    <label className="text-black">Rating</label>
+                                    <input
+                                        type="number"
+                                        placeholder="Rating (1-5)"
+                                        value={review.rating}
+                                        min="1"
+                                        max="5"
+                                        onChange={(e) => handleReviewChange(index, "rating", e.target.value)}
+                                        className="block w-full p-2 border rounded text-black mb-2"
+                                    />
+                                    <label className="text-black">Comment</label>
+                                    <textarea
+                                        placeholder="Comment"
+                                        value={review.comment}
+                                        onChange={(e) => handleReviewChange(index, "comment", e.target.value)}
+                                        className="block w-full p-2 border rounded text-black mb-2"
+                                    ></textarea>
+                                    {formData.reviews.length > 1 && (
+                                        <button
+                                            type="button"
+                                            onClick={() => removeReview(index)}
+                                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                        >
+                                            Remove Review
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+
+                            <button
+                                type="button"
+                                onClick={addReview}
+                                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                            >
+                                Add Review
+                            </button>
+                        </div>
+
                     </div>
 
                     {/* Social Campaigns */}
@@ -301,6 +446,8 @@ const AdminPage = () => {
                             }
                             className="block w-full p-2 border rounded text-black"
                         />
+
+
 
                         <h3 className="text-black font-semibold">Instagram</h3>
 
@@ -375,7 +522,7 @@ const AdminPage = () => {
                         </>
                     )}
 
-                    {secondResponse && listingUrl   && (
+                    {secondResponse && listingUrl && (
                         <>
                             <h3 className="text-lg font-semibold">Second video upload</h3>
                             <input
@@ -385,36 +532,33 @@ const AdminPage = () => {
                                 className="block w-full p-2 text-black"
                             />
 
-                            <button onClick={handleFirstVideoUpload}>Submit First Video</button>
+                            <button className="text-black" onClick={handleSecondVideoUpload}>Submit Second Video</button>
                         </>
                     )}
 
+                    {thirdResponse && (
+                        <div>
+                            <h3 className="text-lg font-semibold text-black">Upload Images (Max: 5)</h3>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                multiple
+                                onChange={handleImageUpload}
+                                className="block w-full p-2 border rounded text-black"
+                            />
+                            <button
+                                type="button"
+                                onClick={handleSubmitImages}
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
+                            >
+                                Submit Images
+                            </button>
+                        </div>
+                    )}
+
+
                     {/* File Uploads */}
-                    {/* <div>
-                        <h3 className="text-lg font-semibold">Videos</h3>
-                        <input
-                            type="file"
-                            accept="video/*"
-                            onChange={(e) => handleFileUpload(e, "uploaded_video_one")}
-                            className="block w-full p-2 text-black"
-                        />
-                        <input
-                            type="file"
-                            accept="video/*"
-                            onChange={(e) => handleFileUpload(e, "uploaded_video_two")}
-                            className="block w-full p-2 text-black"
-                        />
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semibold text-black">Images</h3>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={handleImageUpload}
-                            className="block w-full p-2 text-black"
-                        />
-                    </div> */}
+
 
 
                 </form>
