@@ -8,7 +8,7 @@ const getYouTubeVideoId = (url) => {
 };
 
 
-const DynamicVideoContent = ({ isLeftFlow, header, content, videoUrl, isYoutube }) => {
+const DynamicVideoContent = ({ isLeftFlow, header, content, videoUrl, isYoutube, location }) => {
 
     return (
         <>

@@ -40,7 +40,7 @@ const ListingDetails = ({ features, contactFormHeader }) => {
             <div className="h-[80vh] max-sm:h-auto w-full flex justify-center">
                 <div className="my-5 w-[95%] bg-blueBack rounded-3xl flex max-sm:flex-col justify-between overflow-hidden font-redhat">
                     <div className="w-[50%] max-sm:w-[100%] max-sm:px-[2rem] py-[4rem] max-sm:py-[2rem] px-[4rem] flex flex-col justify-between">
-                        <h2 className="text-[2rem] font-redhat max-sm:text-center max-sm:pb-3 max-sm:text-[1.5rem]">
+                        <h2 className="text-[2rem] font-redhat max-sm:text-center max-sm:pb-3 max-sm:text-[1.5rem] text-white">
                             Discover your dream home in the heart of {features?.city}
                         </h2>
 
@@ -48,24 +48,24 @@ const ListingDetails = ({ features, contactFormHeader }) => {
                             <div className="flex items-center gap-3 max-sm:flex-col max-sm:items-center">
                                 <Image src={Area} width={30} height={30} />
 
-                                <p className="max-sm:font-semibold">{features.beds} Beds</p>
+                                <p className="max-sm:font-semibold text-white">{features.beds} Beds</p>
                             </div>
                             <div className="flex items-center gap-3 max-sm:flex-col max-sm:items-center">
                                 <Image src={Bath} width={30} height={30} />
 
-                                <p className="max-sm:font-semibold">{features.baths} Baths</p>
+                                <p className="max-sm:font-semibold text-white">{features.baths} Baths</p>
                             </div>
                             <div className="flex items-center gap-3 max-sm:flex-col max-sm:items-center">
                                 <Image src={Bed} width={30} height={30} />
 
-                                <p className="max-sm:font-semibold">{features.square_fit} SqFt</p>
+                                <p className="max-sm:font-semibold text-white">{features.square_fit} SqFt</p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-3 mt-[1rem] max-sm:flex-col max-sm:items-center">
                             <Image src={Location} width={30} height={30} />
 
-                            <p className="max-sm:text-center max-sm:font-semibold">{features?.address || "default address"}</p>
+                            <p className="max-sm:text-center max-sm:font-semibold text-white">{features?.address || "default address"}</p>
                         </div>
 
                         <div className="flex items-center justify-between max-sm:flex-col max-sm:gap-4 max-sm:pt-2">

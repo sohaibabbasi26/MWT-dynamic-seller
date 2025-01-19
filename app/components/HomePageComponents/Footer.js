@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 
-const Footer = () => {
+const Footer = ({location}) => {
     return (
         <>
             <div className="w-full h-[50vh] max-sm:h-[150vh] bg-blueBack flex justify-center items-center py-[2rem]">
@@ -17,26 +17,26 @@ const Footer = () => {
                     </div>
 
                     <div className="h-full w-[30%] flex flex-col max-sm:w-[100%] justify-center font-redhat max-sm:items-center">
-                        <h2 className="text-lg font-semibold">
+                        <h2 className="text-lg font-semibold text-white">
                             The Mike Webb Team
                         </h2>
 
                         <div className="w-full h-full flex gap- max-sm:flex-col max-sm:items-center">
                             <div className="w-[50%] ">
                                 <ul className="text-sm max-sm:text-center">
-                                    <li className="py-1 cursor-pointer">About</li>
-                                    <li className="py-1 cursor-pointer">Client Success Stories</li>
-                                    <li className="py-1 cursor-pointer">Search for Homes</li>
-                                    <li className="py-1 cursor-pointer">Buyers</li>
+                                    <li className="py-1 cursor-pointer text-white">About</li>
+                                    <li className="py-1 cursor-pointer text-white">Client Success Stories</li>
+                                    <li className="py-1 cursor-pointer text-white">Search for Homes</li>
+                                    <li className="py-1 cursor-pointer text-white">Buyers</li>
                                 </ul>
                             </div>
 
                             <div className="w-[50%]">
                                 <ul className="text-sm max-sm:text-center">
-                                    <li className="py-1 cursor-pointer">Sellers</li>
-                                    <li className="py-1 cursor-pointer">Get Your Home's Value</li>
-                                    <li className="py-1 cursor-pointer">Schedule a Call</li>
-                                    <li className="py-1 cursor-pointer">Schedule a Call</li>
+                                    <li className="py-1 cursor-pointer text-white">Sellers</li>
+                                    <li className="py-1 cursor-pointer text-white">Get Your Home's Value</li>
+                                    <li className="py-1 cursor-pointer text-white">Schedule a Call</li>
+                                    <li className="py-1 cursor-pointer text-white">Schedule a Call</li>
                                 </ul>
                             </div>
                         </div>
@@ -46,7 +46,7 @@ const Footer = () => {
                                 <Image className="pt-1 max-sm:h-[50px] max-sm:w-[30px]" src="/icons/location.png" width={25} height={42} alt="location" />
                             </div>
                             <div className="max-sm:w-[100%] max-sm:flex max-sm:justify-center">
-                                <h2 className="text-[16px] font-semibold font-redhat max-sm:w-[95%] max-sm:text-center">5100 Leesburg Pike Suite #200, Alexandria, VA 22302</h2>
+                                <h2 className="text-[16px] font-semibold font-redhat max-sm:w-[95%] max-sm:text-center">{location}</h2>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ const Footer = () => {
                     <div className="h-full w-[30%] flex flex-col max-sm:w-[100%] max-sm:items-center">
                         <div className="flex items-start gap-2">
                             <input type="checkbox" className="mt-1" />
-                            <span className="text-sm font-redhat">
+                            <span className="text-sm font-redhat text-white">
                                 I agree to be contacted by The Mike Webb Team via call, email, and text. To opt-out, you can reply ‘STOP’ at any time or click the unsubscribe link in the emails. Message and data rates may apply. Message frequency varies. For more information, see our{" "}
                                 <a href="/privacy-policy-and-terms-of-use" className="text-orangeBack">
                                     Privacy Policy
@@ -68,7 +68,7 @@ const Footer = () => {
                             <div className="flex gap-2 items-center">
                                 <Image src="/Letter.png" height={30} width={30} />
 
-                                <p className="text-sm font-redhat">
+                                <p className="text-sm font-redhat text-white">
                                     Enter your email
                                 </p>
                             </div>

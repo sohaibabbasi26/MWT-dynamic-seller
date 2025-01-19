@@ -16,8 +16,8 @@ const ReviewCard = ({ role, name, description, rating }) => {
                             <Image className="h-full w-full rounded-full bg-orangeBack" src={Avatar} height={30} width={30} />
                         </div>
                         <div className="flex flex-col">
-                            <p className="font-semibold">{name}</p>
-                            <span className="text-sm">
+                            <p className="font-semibold text-white">{name}</p>
+                            <span className="text-sm text-white">
                                 {role || "Client"}
                             </span>
                         </div>
@@ -26,12 +26,12 @@ const ReviewCard = ({ role, name, description, rating }) => {
                     <Image src={Qoutes} height={30} width={30} />
                 </div>
 
-                <p className="text-sm mt-[1rem]">{description}</p>
+                <p className="text-sm mt-[1rem] text-white">{description}</p>
 
                 <div className="w-[100%] flex justify-end gap-2 mt-2">
-                    <span>{rating}</span>
+                    <span className="text-white">{rating}</span>
                     <StarRating rating={rating} />
-                </div>
+                </div>  
             </div>
         </>
     )

@@ -17,9 +17,9 @@ const initialState = {
       square_fit: null,
     },
     socialCampaignsLinks: {
-      fb: null,
-      ig: null,
-      email_blast: null,
+      fb: [],
+      ig: [],
+      email_blast: [],
     },
     contact_form_header: null,
     reviews: [],

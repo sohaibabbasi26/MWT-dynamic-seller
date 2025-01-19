@@ -16,12 +16,14 @@ const AdminPage = () => {
         location: "",
         description: "",
         visitors: 0,
-        views: 0,
+        zillowViews: 0,
+        mlsViews: 0,
+        homesDotComViews: 0,
         listing_engagements: 0,
         interested_buyers: 0,
         saves: 0,
         features: { beds: 0, baths: 0, square_fit: 0, address: "", pricing: "", discountPercentage: "", city: "" },
-        socialCampaignsLinks: { fb: "", ig: "", email_blast: "" },
+        socialCampaignsLinks: { fb: [], ig: [], email_blast: [] },
         contact_form_header: "",
         reviews: [{ name: "", rating: 0, comment: "" }],
         yt_link: "",
@@ -51,6 +53,47 @@ const AdminPage = () => {
             ...prev,
             reviews: updatedReviews,
         }));
+    };
+
+    const addSocialLink = (platform) => {
+        setFormData((prev) => ({
+            ...prev,
+            socialCampaignsLinks: {
+                ...prev.socialCampaignsLinks,
+                [platform]: [...prev.socialCampaignsLinks[platform], ""],
+            },
+        }));
+    };
+
+    const handleSocialLinkChange = (platform, index, value) => {
+        setFormData((prev) => {
+            const updatedLinks = [...prev.socialCampaignsLinks[platform]];
+            updatedLinks[index] = value;
+
+            return {
+                ...prev,
+                socialCampaignsLinks: {
+                    ...prev.socialCampaignsLinks,
+                    [platform]: updatedLinks,
+                },
+            };
+        });
+    };
+
+    // Function to remove a social link input field
+    const removeSocialLink = (platform, index) => {
+        setFormData((prev) => {
+            const updatedLinks = [...prev.socialCampaignsLinks[platform]];
+            updatedLinks.splice(index, 1);
+
+            return {
+                ...prev,
+                socialCampaignsLinks: {
+                    ...prev.socialCampaignsLinks,
+                    [platform]: updatedLinks,
+                },
+            };
+        });
     };
 
     const [uploadedImages, setUploadedImages] = useState([]);
@@ -125,12 +168,19 @@ const AdminPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            const totalViews = parseInt(formData.zillowViews) + parseInt(formData.homesDotComViews) + parseInt(formData.mlsViews);
+            console.log("[Total Views]:", totalViews);
             const result = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/create-listing`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify(
+                    {
+                        ...formData,
+                        views: totalViews
+                    }
+                )
             });
             const data = await result.json();
             console.log("[DATA FROM THE SERVER]:", data);
@@ -140,7 +190,7 @@ const AdminPage = () => {
                 setListingUrl(`https://dynamic-seller.vercel.app/home/${data?.listing?.listing_id}`);
                 setListingId(data?.listing?.listing_id);
             }
-            return; 
+            return;
         } catch (err) {
             console.log("[ERROR]:", err);
             return err;
@@ -257,12 +307,32 @@ const AdminPage = () => {
                         className="block w-full p-2 border rounded text-black"
                     />
 
-                    <h3 className="text-black font-semibold">Views</h3>
+                    <h3 className="text-black font-semibold">Zillow Views</h3>
                     <input
                         type="number"
-                        name="views"
-                        placeholder="Views"
-                        value={formData.views}
+                        name="zillowViews"
+                        placeholder="Zillow Views"
+                        value={formData.zillowViews}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Bright MLS Views</h3>
+                    <input
+                        type="number"
+                        name="mlsViews"
+                        placeholder="Bright MLS Views"
+                        value={formData.mlsViews}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Homes.com Views</h3>
+                    <input
+                        type="number"
+                        name="homesDotComViews"
+                        placeholder="Homes.com Views"
+                        value={formData.homesDotComViews}
                         onChange={handleChange}
                         className="block w-full p-2 border rounded text-black"
                     />
@@ -431,56 +501,89 @@ const AdminPage = () => {
                     <div className="space-y-3">
                         <h3 className="text-lg font-semibold text-black">Social Campaign Links</h3>
 
-                        <h3 className="text-black font-semibold">Facebook</h3>
+                        {/* Facebook Links */}
+                        <h3 className="text-black font-semibold">Facebook Links</h3>
+                        {formData.socialCampaignsLinks.fb.map((link, index) => (
+                            <div key={index} className="flex gap-2 mb-2">
+                                <input
+                                    type="url"
+                                    placeholder="Facebook Link"
+                                    value={link}
+                                    onChange={(e) => handleSocialLinkChange("fb", index, e.target.value)}
+                                    className="block w-full p-2 border rounded text-black"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => removeSocialLink("fb", index)}
+                                    className="bg-red-500 text-white px-2 py-1 rounded"
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={() => addSocialLink("fb")}
+                            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                        >
+                            Add Facebook Link
+                        </button>
 
-                        <input
-                            type="url"
-                            name="fb"
-                            placeholder="Facebook Link"
-                            value={formData.socialCampaignsLinks.fb}
-                            onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
-                                    socialCampaignsLinks: { ...prev.socialCampaignsLinks, fb: e.target.value },
-                                }))
-                            }
-                            className="block w-full p-2 border rounded text-black"
-                        />
+                        {/* Instagram Links */}
+                        <h3 className="text-black font-semibold">Instagram Links</h3>
+                        {formData.socialCampaignsLinks.ig.map((link, index) => (
+                            <div key={index} className="flex gap-2 mb-2">
+                                <input
+                                    type="url"
+                                    placeholder="Instagram Link"
+                                    value={link}
+                                    onChange={(e) => handleSocialLinkChange("ig", index, e.target.value)}
+                                    className="block w-full p-2 border rounded text-black"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => removeSocialLink("ig", index)}
+                                    className="bg-red-500 text-white px-2 py-1 rounded"
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={() => addSocialLink("ig")}
+                            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                        >
+                            Add Instagram Link
+                        </button>
 
-
-
-                        <h3 className="text-black font-semibold">Instagram</h3>
-
-                        <input
-                            type="url"
-                            name="ig"
-                            placeholder="Instagram Link"
-                            value={formData.socialCampaignsLinks.ig}
-                            onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
-                                    socialCampaignsLinks: { ...prev.socialCampaignsLinks, ig: e.target.value },
-                                }))
-                            }
-                            className="block w-full p-2 border rounded text-black"
-                        />
-
-                        <h3 className="text-black font-semibold">Email Blast</h3>
-
-                        <input
-                            type="url"
-                            name="email blast"
-                            placeholder="Email Blast Link"
-                            value={formData.socialCampaignsLinks.email_blast}
-                            onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
-                                    socialCampaignsLinks: { ...prev.socialCampaignsLinks, email_blast: e.target.value },
-                                }))
-                            }
-                            className="block w-full p-2 border rounded text-black"
-                        />
-
+                        {/* Email Blast Links */}
+                        <h3 className="text-black font-semibold">Email Blast Links</h3>
+                        {formData.socialCampaignsLinks.email_blast.map((link, index) => (
+                            <div key={index} className="flex gap-2 mb-2">
+                                <input
+                                    type="url"
+                                    placeholder="Email Blast Link"
+                                    value={link}
+                                    onChange={(e) => handleSocialLinkChange("email_blast", index, e.target.value)}
+                                    className="block w-full p-2 border rounded text-black"
+                                />
+                                <button
+                                    type="button"
+                                    onClick={() => removeSocialLink("email_blast", index)}
+                                    className="bg-red-500 text-white px-2 py-1 rounded"
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        ))}
+                        <button
+                            type="button"
+                            onClick={() => addSocialLink("email_blast")}
+                            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                        >
+                            Add Email Blast Link
+                        </button>
                     </div>
 
                     <button
