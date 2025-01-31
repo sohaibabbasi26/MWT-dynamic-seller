@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { formatDateToDDMMYYYY } from "@/utils/formatDate";
 
 const IndividualListing = () => {
 
@@ -9,6 +10,12 @@ const IndividualListing = () => {
     const [firstResponse, setFirstResponse] = useState(false);
     const [secondResponse, setSecondResponse] = useState(false);
     const [thirdResponse, setThirdResponse] = useState(false);
+    const [fourthResponse, setFourthResponse] = useState(false);
+    const [fifthResponse, setFifthResponse] = useState(false);
+    const [igPosts, setIgPosts] = useState(null);
+    const [fbPosts, setFbPosts] = useState(false);
+    const [selectedPostIds, setSelectedPostIds] = useState([]);
+    const [selectedFbPostIds, setSelectedFbPostIds] = useState([]);
     const [formData, setFormData] = useState({
         location: "",
         description: "",
@@ -155,6 +162,8 @@ const IndividualListing = () => {
         e.preventDefault();
         try {
             const totalViews = parseInt(formData.zillowViews) + parseInt(formData.homesDotComViews) + parseInt(formData.mlsViews);
+            const totalVisitors = parseInt(formData.zillowViews) + parseInt(formData.homesDotComViews) + parseInt(formData.mlsViews) + parseInt(formData.listing_engagements) + parseInt(formData.interested_buyers) + parseInt(formData.saves);
+
             console.log("[Total Views]:", totalViews);
             const result = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/edit-listing`, {
                 method: "PUT",
@@ -166,11 +175,13 @@ const IndividualListing = () => {
                         listing_id: id,
                         data: {
                             ...formData,
-                            views: totalViews
+                            views: totalViews,
+                            visitors: totalVisitors
                         }
                     }
                 )
             });
+
             const data = await result.json();
             console.log("[DATA FROM THE SERVER]:", data);
             if (data?.status === 200) {
@@ -208,6 +219,7 @@ const IndividualListing = () => {
 
             if (response.ok) {
                 alert('Images uploaded successfully!');
+                setFourthResponse(true);
             } else {
                 console.error("[ERROR IN RESPONSE]:", data.message);
             }
@@ -327,11 +339,136 @@ const IndividualListing = () => {
         });
     };
 
+    const fetchIGPosts = async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/get-all-insta-posts`, {
+                method: "GET"
+            });
+            const data = await response.json();
+            console.log("[DATA]:", data);
+            if (data?.status === 200) {
+                setIgPosts(data?.data);
+                return
+            } else {
+                return
+            }
+        } catch (err) {
+            console.log("[ERROR]:", err);
+            return;
+        }
+    }
+
+    const fetchFBPosts = async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/get-all-facebook-posts`, {
+                method: "GET"
+            });
+            const data = await response.json();
+            console.log("[DATA FOR FB POSTS]:", data);
+            if (data?.status === 200) {
+                setFbPosts(data?.posts);
+                return
+            } else {
+                return
+            }
+        } catch (err) {
+            console.log("[ERROR]:", err);
+            return;
+        }
+    }
+
+    useEffect(() => {
+        fetchIGPosts();
+        fetchFBPosts();
+    }, []);
+
+    const togglePostSelection = (postId) => {
+        setSelectedPostIds((prevSelected) =>
+            prevSelected.includes(postId)
+                ? prevSelected.filter((id) => id !== postId)
+                : [...prevSelected, postId]
+        );
+    };
+
+    const toggleFbPostSelection = (post) => {
+        console.log("[POST]:", post)
+        setSelectedFbPostIds((prevSelected) => {
+            const isSelected = prevSelected.some((selectedPost) => selectedPost.id === post.id);
+            console.log("[is selected condition]:", isSelected);
+
+            if (isSelected) {
+                return prevSelected.filter((selectedPost) => selectedPost.id !== post.id);
+            } else {
+                // setSelectedFbPostIds()
+                return [...prevSelected, post];
+            }
+        });
+    };
+
+    const submitInstaPostsForAutoGenerationOfViews = async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/update-automatic-views`, {
+                method: "POST",
+                body: JSON.stringify({
+                    mediaIds: selectedPostIds,
+                    facebookPosts: selectedFbPostIds,
+                    listing_id: id
+                }),
+                headers: {
+                    "content-type": "application/json"
+                }
+            });
+            const data = await response.json();
+
+            console.log("[DATA FROM SERVER]:", data);
+            if (data?.status === 200) {
+                setFifthResponse(true);
+                return;
+            } else {
+                alert("Ther was some error at the server side");
+                return;
+            }
+            return;
+        } catch (err) {
+            console.log("[ERR]:", err);
+            return
+        }
+    }
+
     return (
         <>
             <div className="p-6">
                 <h1 className="text-2xl font-bold mb-4 text-black">Admin Panel - Hero Section</h1>
+
+                <div className="w-full h-[20%] flex justify-center items-center mt-[2rem]">
+                    <div className="border-2 rounded-2xl border-black p-5">
+                        <h1 className="text-black text-[1rem] font-bold pb-2">STEPS TO FILL OUT THE FORM:</h1>
+                        <ul className="text-black">
+                            <li>
+                                <span className="font-bold">STEP 1:</span> Fill the textual information about the listing page, then suibmit and wait for second step to get enabled.
+                            </li>
+                            <li>
+                                <span className="font-bold">STEP 2:</span> Upload the video (not more than 10mb) that should reflect on "Marketing Insights section", then submit and wait for third step to get enabled.
+                            </li>
+                            <li>
+                                <span className="font-bold">STEP 3:</span> Upload the video (not more than 10mb) that should reflect on "Bright MLS", then submit and wait for fourth step to get enabled.
+                            </li>
+                            <li>
+                                <span className="font-bold">STEP 4:</span> Upload the pictures (not more than 10mb each and maximum 5) and wait for the popup to display the success of upload.
+                            </li>
+                            <li>
+                                <span className="font-bold">STEP 5:</span> Select the insta and fb posts you want to use for this one listing, and submit. (For automatic generation of listing engagement, enterested buyers and social media views values.)
+                            </li>
+                        </ul>
+
+                        <p className="text-black pt-2 text-sm"><span className="font-bold">NOTE:</span> One step will be visible before the next one, complete one step and then wait for the next one.</p>
+                    </div>
+                </div>
+
+
                 <div className="p-8 bg-gray-100">
+                    <h1 className="text-3xl font-bold mb-4 text-black">STEP 1:</h1>
+
                     <h1 className="text-2xl font-bold mb-4 text-black">Create New Listing</h1>
                     <form onSubmit={handleSubmit} className="space-y-3">
                         <h3 className="text-black font-semibold">Location</h3>
@@ -354,7 +491,7 @@ const IndividualListing = () => {
                             className="block w-full p-2 border rounded text-black"
                         />
 
-                        <h3 className="text-black font-semibold">Visitors</h3>
+                        {/* <h3 className="text-black font-semibold">Visitors</h3>
                         <input
                             type="number"
                             name="visitors"
@@ -362,7 +499,7 @@ const IndividualListing = () => {
                             value={formData.visitors}
                             onChange={handleChange}
                             className="block w-full p-2 border rounded text-black"
-                        />
+                        /> */}
 
                         <h3 className="text-black font-semibold">Zillow Views</h3>
                         <input
@@ -414,35 +551,7 @@ const IndividualListing = () => {
                             className="block w-full p-2 border rounded text-black"
                         />
 
-                        <h3 className="text-black font-semibold">Listing Engagements</h3>
-                        <input
-                            type="number"
-                            name="listing_engagements"
-                            placeholder="Listing Engagements"
-                            value={formData.listing_engagements}
-                            onChange={handleChange}
-                            className="block w-full p-2 border rounded text-black"
-                        />
 
-                        <h3 className="text-black font-semibold">Interested Buyers</h3>
-                        <input
-                            type="number"
-                            name="interested_buyers"
-                            placeholder="Number of Interested buyers"
-                            value={formData.interested_buyers}
-                            onChange={handleChange}
-                            className="block w-full p-2 border rounded text-black"
-                        />
-
-                        <h3 className="text-black font-semibold">Address of the listing</h3>
-                        <input
-                            type="text"
-                            name="address"
-                            placeholder="Enter the locality of the listing"
-                            value={formData.address}
-                            onChange={handleChange}
-                            className="block w-full p-2 border rounded text-black"
-                        />
 
                         {/* Features */}
                         <div className="space-y-3">
@@ -496,6 +605,15 @@ const IndividualListing = () => {
                                 placeholder="City"
                                 value={formData?.features?.city}
                                 onChange={(e) => handleFeatureChange(e, "city")}
+                                className="block w-full p-2 border rounded text-black"
+                            />
+
+                            <h3 className="text-black font-semibold">Address of the listing</h3>
+                            <input
+                                type="text"
+                                placeholder="address of the listing"
+                                value={formData.features.address}
+                                onChange={(e) => handleFeatureChange(e, "address")}
                                 className="block w-full p-2 border rounded text-black"
                             />
 
@@ -650,27 +768,22 @@ const IndividualListing = () => {
                             Update Listing Info
                         </button>
 
-                        {firstResponse && (
+                        {/* {firstResponse && (
                             <>
                                 <p className="text-center text-green-900">
                                     Successfully created a listing, now you can move forward to add media, don't refresh the page before adding the media.
                                 </p>
                             </>
-                        )}
+                        )} */}
 
-                        {listingUrl && (
-                            <>
-                                <h3 className="text-black font-semibold">Make sure to copy this link before refreshing.</h3>
 
-                                <p className="text-black text-center">
-                                    {listingUrl}
-                                </p>
-                            </>
-                        )}
 
                         {firstResponse && listingUrl && (
                             <>
-                                <h3 className="text-lg font-semibold text-black">First video upload</h3>
+                                <h1 className="text-3xl font-bold mb-4 text-black">STEP 2:</h1>
+
+
+                                <h3 className="text-lg font-semibold text-black">First video upload (will be reflected on Market Insights and Marketing Metrics)</h3>
                                 <input
                                     type="file"
                                     accept="video/*"
@@ -678,13 +791,16 @@ const IndividualListing = () => {
                                     className="block w-full p-2 text-black"
                                 />
 
-                                <button type="button" className="text-black" onClick={handleFirstVideoUpload}>Submit First Video</button>
+                                <button type="button" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    onClick={handleFirstVideoUpload}>Submit First Video</button>
                             </>
                         )}
 
                         {secondResponse && listingUrl && (
                             <>
-                                <h3 className="text-lg font-semibold">Second video upload</h3>
+                                <h1 className="text-3xl font-bold mb-4 text-black">STEP 3:</h1>
+
+                                <h3 className="text-lg font-semibold text-black">Second video upload (will be reflected on Market Insights and Marketing Metrics)</h3>
                                 <input
                                     type="file"
                                     accept="video/*"
@@ -692,12 +808,15 @@ const IndividualListing = () => {
                                     className="block w-full p-2 text-black"
                                 />
 
-                                <button type="button" className="text-black" onClick={handleSecondVideoUpload}>Submit Second Video</button>
+                                <button type="button" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    onClick={handleSecondVideoUpload}>Submit Second Video</button>
                             </>
                         )}
 
                         {thirdResponse && (
                             <div>
+                                <h1 className="text-3xl font-bold mb-4 text-black">STEP 4:</h1>
+
                                 <h3 className="text-lg font-semibold text-black">Upload Images (Max: 5)</h3>
                                 <input
                                     type="file"
@@ -717,8 +836,83 @@ const IndividualListing = () => {
                         )}
 
 
-                        {/* File Uploads */}
+                        {fourthResponse && (
+                            <>
+                                <h3 className="text-black font-semibold">Make sure to copy this link before refreshing.</h3>
 
+                                <p className="text-black text-center">
+                                    {listingUrl}
+                                </p>
+                            </>
+                        )}
+
+
+                        {/* File Uploads */}
+                        {fourthResponse && (
+                            <>
+                                <div className=" flex flex-wrap gap-4">
+                                    <h1 className="text-3xl font-bold mb-4 text-black">STEP 5:</h1>
+
+                                    <h1 className="text-3xl font-bold mb-4 text-black">SELECT INSTAGRAM POSTS:</h1>
+                                    {igPosts?.length > 0 && (
+                                        <>
+                                            {igPosts.map((post, index) => (
+                                                <div onClick={() => togglePostSelection(post.id)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
+                                    ${selectedPostIds.includes(post.id) ? "border-blue-500 bg-blue-100" : "border-black"}
+                                `}>
+                                                    <div className="mb-[1rem]">
+                                                        <span className="text-black font-xl font-bold ">POSTED ON:</span>
+                                                        <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.timestamp)}</span>
+                                                    </div>
+                                                    <p className="text-sm text-black line-clamp-3">{post?.caption}</p>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
+
+
+                                </div>
+
+
+                                <div className=" flex flex-wrap gap-4">
+                                    <h1 className="text-3xl font-bold mb-4 text-black">SELECT FACEBOOK POSTS:</h1>
+                                    {fbPosts?.length > 0 && (
+                                        <>
+                                            {fbPosts?.map((post, index) => (
+                                                <div onClick={() => toggleFbPostSelection(post)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
+                                    ${selectedFbPostIds.includes(post.id) ? "border-blue-500 bg-blue-100" : "border-black"}
+                                `}>
+                                                    <div className="mb-[1rem]">
+                                                        <span className="text-black font-xl font-bold ">POSTED ON:</span>
+                                                        <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.created_time)}</span>
+                                                    </div>
+                                                    <p className="text-sm text-black line-clamp-3">{post?.message}</p>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
+
+
+                                </div>
+
+                                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4"
+                                    onClick={submitInstaPostsForAutoGenerationOfViews}>Submit</button>
+
+
+
+                            </>
+                        )}
+
+
+                        {fifthResponse && (
+                            <>
+                                <h3 className="text-black font-semibold">Make sure to copy thus link before refreshing.</h3>
+
+                                <p className="text-black text-center">
+                                    {listingUrl}
+                                </p>
+                            </>
+                        )}
 
 
                     </form>

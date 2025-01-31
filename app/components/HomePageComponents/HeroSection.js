@@ -15,7 +15,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
             <div className="h-auto pt-[4rem] max-sm:pt-[5rem] w-full bg-blueBack flex justify-center ">
                 <div className="w-[90%] h-[100%] max-sm:items-center flex flex-col items-center justify-center">
                     <div className="w-[60%] px-10 h-[100%] flex flex-col items-center justify-center max-sm:items-center max-sm:w-[100%]">
-                        <h1 className="text-white text-center text-[3.5rem] w-[80%] font-redhat max-sm:text-[2rem] max-sm:text-center max-sm:w-full">
+                        <h1 className="text-white text-center text-[3.5rem] w-[80%] font-redhat max-sm:text-[2rem] max-sm:text-center max-sm:w-full ">
                             {title}
                         </h1>
 
@@ -41,7 +41,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                                 </div>
                                 <div>
                                     <h2 className="text-[16px] font-semibold font-redhat max-sm:text-center text-white">Location</h2>
-                                    <p className="text-[14px] font-redhat text-white">{location}</p>
+                                    <p className="text-[14px] font-redhat text-white max-sm:text-center">{location}</p>
                                 </div>
                             </div>
 
@@ -51,7 +51,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                                 </div>
                                 <div>
                                     <h2 className="text-[16px] font-semibold font-redhat max-sm:text-center text-white">Visitors</h2>
-                                    <p className="text-[14px] font-redhat text-white">{visitors}</p>
+                                    <p className="text-[14px] font-redhat text-white max-sm:text-center">{visitors}</p>
                                 </div>
                             </div>
 
@@ -61,7 +61,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                                 </div>
                                 <div>
                                     <h2 className="text-[16px] font-semibold font-redhat max-sm:text-center text-white">Last Updated</h2>
-                                    <p className="text-[14px] font-redhat text-white">{formatDateToDDMMYYYY(lastUpdated)}</p>
+                                    <p className="text-[14px] font-redhat text-white max-sm:text-center">{formatDateToDDMMYYYY(lastUpdated)}</p>
                                 </div>
                             </div>
                         </div>

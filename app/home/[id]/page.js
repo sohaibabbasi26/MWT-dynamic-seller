@@ -56,11 +56,6 @@ const HomePage = () => {
         }
     }, [id]);
 
-    // useEffect(() => {
-    //     console.log("[SOCIAL CAMPAIGNS LINKS]:", data.socialCampaignsLinks);
-    // }, [data]);
-
-
 
     if (loading) {
         return <p>Loading...</p>;
@@ -141,6 +136,22 @@ const HomePage = () => {
         <p className="text-blueBack font-redhat text-sm font-semibold max-sm:text-center">
             BrightMLS provides a centralized platform where we list properties, access extensive property data, and collaborate with other agents to streamline buying and selling processes. It offers tools and resources to improve property marketing, ensure accurate listings, and enhance client service, ultimately making real estate transactions more efficient and transparent.
         </p>
+
+        <div className="w-[25%] max-sm:w-full h-[20%] bg-blueBack rounded-2xl px-8 flex items-center justify-between max-sm:flex-col max-sm:h-full">
+            <div className="py-4 h-full  flex flex-col justify-between max-sm:items-center">
+                <div className="flex items-center justify-between gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
+                    <p className="font-redhat max-sm:text-xl max-sm:font-semibold text-white">
+                        {data?.mlsViews}
+                    </p>
+
+                    <Image src="/icons/eye.png" className="max-sm:h-[40px] max-sm:w-[40px]" height={20} width={20} />
+                </div>
+
+                <p className="font-redhat text-white">
+                    Views
+                </p>
+            </div>
+        </div>
     </>
 
     const thirdVideoSectionContent = <>
@@ -173,9 +184,9 @@ const HomePage = () => {
                 header="Market Insights & Marketing Metrics"
             />  */}
 
-            {/* <GraphaSection views={data?.visitors || 0} saves={data?.saves || 0} /> */}
+            <GraphaSection views={data?.views || 0} saves={data?.saves || 0} />
 
-            <Zillow location={data?.location} />
+            <Zillow zillowViews={data?.zillowViews} saves={data?.saves} location={data?.location} />
 
             <DynamicVideoContent
                 isLeftFlow={false}

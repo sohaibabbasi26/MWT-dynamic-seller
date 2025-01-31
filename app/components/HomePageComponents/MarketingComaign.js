@@ -42,9 +42,9 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
     };
 
     const allListings = [
-        ...facebookListings.map((url, index) => ({ url, platform: "Facebook", icon: FbIcon, image: getCircularImage(index) })),
-        ...instagramListings.map((url, index) => ({ url, platform: "Instagram", icon: IgIcon, image: getCircularImage(index) })),
-        ...emailBlastListings.map((url, index) => ({ url, platform: "Email Blast", icon: EmailBlastIcon, image: getCircularImage(index) }))
+        ...facebookListings?.map((url, index) => ({ url, platform: "Facebook", icon: FbIcon, image: getCircularImage(index) })),
+        ...instagramListings?.map((url, index) => ({ url, platform: "Instagram", icon: IgIcon, image: getCircularImage(index) })),
+        ...emailBlastListings?.map((url, index) => ({ url, platform: "Email Blast", icon: EmailBlastIcon, image: getCircularImage(index) }))
     ];
 
     return (

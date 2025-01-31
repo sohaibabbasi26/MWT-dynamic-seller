@@ -46,7 +46,7 @@ const Footer = ({location}) => {
                                 <Image className="pt-1 max-sm:h-[50px] max-sm:w-[30px]" src="/icons/location.png" width={25} height={42} alt="location" />
                             </div>
                             <div className="max-sm:w-[100%] max-sm:flex max-sm:justify-center">
-                                <h2 className="text-[16px] font-semibold font-redhat max-sm:w-[95%] max-sm:text-center">{location}</h2>
+                                <h2 className="text-[16px] font-semibold font-redhat max-sm:w-[95%] max-sm:text-center text-white">{location}</h2>
                             </div>
                         </div>
                     </div>
