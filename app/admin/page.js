@@ -475,7 +475,7 @@ const AdminPage = () => {
                         className="block w-full p-2 border rounded text-black"
                     />
 
-                    <h3 className="text-black font-semibold">Saves</h3>
+                    <h3 className="text-black font-semibold">Saves (For Zillow)</h3>
                     <input
                         type="number"
                         name="saves"

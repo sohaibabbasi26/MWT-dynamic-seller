@@ -16,6 +16,7 @@ import ContactForm from "../../components/HomePageComponents/ContactForm";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setListing } from "@/app/redux/slices/listingSlice";
+import PropertyBrochure from "@/app/components/HomePageComponents/Brochure";
 
 const HomePage = () => {
     const { id } = useParams();
@@ -107,7 +108,7 @@ const HomePage = () => {
                         {data?.listing_engagements}
                     </p>
 
-                    <Image src="/icons/group.png" className="max-sm:h-[40px] max-sm:w-[40px]" height={20} width={20} />
+                    <Image src="/icons/Group.png" className="max-sm:h-[40px] max-sm:w-[40px]" height={20} width={20} />
                 </div>
 
                 <p className="font-redhat text-white">
@@ -137,21 +138,12 @@ const HomePage = () => {
             BrightMLS provides a centralized platform where we list properties, access extensive property data, and collaborate with other agents to streamline buying and selling processes. It offers tools and resources to improve property marketing, ensure accurate listings, and enhance client service, ultimately making real estate transactions more efficient and transparent.
         </p>
 
-        <div className="w-[25%] max-sm:w-full h-[20%] bg-blueBack rounded-2xl px-8 flex items-center justify-between max-sm:flex-col max-sm:h-full">
-            <div className="py-4 h-full  flex flex-col justify-between max-sm:items-center">
-                <div className="flex items-center justify-between gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
-                    <p className="font-redhat max-sm:text-xl max-sm:font-semibold text-white">
-                        {data?.mlsViews}
-                    </p>
-
-                    <Image src="/icons/eye.png" className="max-sm:h-[40px] max-sm:w-[40px]" height={20} width={20} />
-                </div>
-
-                <p className="font-redhat text-white">
-                    Views
-                </p>
+        <div className="flex justify-start w-full h-full gap-[1rem]">
+            <div className="flex flex-col gap-[1rem] max-sm:items-center items-start w-[100%] max-sm:w-[90%] max-sm:flex-col">
+                <GraphaSection h={150} w={300} heading="Bright MLS Views" isComponent={true} views={data?.mlsViews} displayBtn={true} saves={2} />
             </div>
         </div>
+
     </>
 
     const thirdVideoSectionContent = <>
@@ -178,15 +170,11 @@ const HomePage = () => {
                 images={data?.uploaded_images || []}
             />
 
-            {/* <DynamicVideoContent
-                isLeftFlow={false}
-                content={<p>Dynamic video content goes here.</p>}
-                header="Market Insights & Marketing Metrics"
-            />  */}
-
-            <GraphaSection views={data?.views || 0} saves={data?.saves || 0} />
-
-            <Zillow zillowViews={data?.zillowViews} saves={data?.saves} location={data?.location} />
+            <div className="w-full flex justify-center">
+                <div className="w-[95%]">
+                    <GraphaSection h={200} w={400} isComponent={false} heading="Over All Views" views={data?.views || 0} saves={data?.saves || 0} displayBtn={false} />
+                </div>
+            </div>
 
             <DynamicVideoContent
                 isLeftFlow={false}
@@ -197,9 +185,7 @@ const HomePage = () => {
                 location={data?.location}
             />
 
-            {/* <GraphaSection views={data?.visitors} saves={data?.saves} /> */}
-
-            {/* <Zillow /> */}
+            <Zillow zillowViews={data?.zillowViews} saves={data?.saves} location={data?.location} />
 
             <DynamicVideoContent
                 isLeftFlow={true}
@@ -220,6 +206,8 @@ const HomePage = () => {
                 videoUrl={data?.yt_link}
                 isYoutube={true}
             />
+
+            {/* <PropertyBrochure /> */}
 
             <ContactForm />
 

@@ -55,9 +55,9 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
                     Our approach includes the following campaigns that highlight your property's most impressive features.
                 </p>
 
-                <button className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] max-sm:w-[100%] font-redhat">
+                {/* <button className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] max-sm:w-[100%] font-redhat">
                     Visit Zillow
-                </button>
+                </button> */}
             </div>
 
             <div className="w-[90%] h-full pt-[2rem] flex flex-wrap justify-center gap-6">
