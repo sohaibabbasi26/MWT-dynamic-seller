@@ -16,7 +16,7 @@ import ContactForm from "../../components/HomePageComponents/ContactForm";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setListing } from "@/app/redux/slices/listingSlice";
-import PropertyBrochure from "@/app/components/HomePageComponents/Brochure";
+// import PropertyBrochure from "@/app/components/HomePageComponents/Brochure";
 
 const HomePage = () => {
     const { id } = useParams();
