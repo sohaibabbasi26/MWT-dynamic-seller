@@ -11,7 +11,7 @@ const Zillow = ({ saves, location, zillowViews }) => {
     
     return (
         <>
-            <div className="w-full h-auto my-[2rem] flex flex-col gap-[1rem] justify-center items-center max-sm:h-auto">
+            <div className="w-full h-auto max-sm:my-[0.5rem] my-[2rem] flex flex-col gap-[1rem] justify-center items-center max-sm:h-auto">
                 <h2 className="text-blueBack font-redhat text-[2.5rem] uppercase font-semibold">Zillow</h2>
 
                 <p className="text-blueBack text-center w-[80%] font-redhat font-semibold">
@@ -21,8 +21,8 @@ const Zillow = ({ saves, location, zillowViews }) => {
                     <span className="text-orangeBack"> {location} </span> by The Mike Webb Team
                 </p>
 
-                <div className="flex justify-center gap-[3rem] w-[90%]">
-                    <div className="flex flex-col  gap-[1rem] max-sm:items-center items-center w-[20%] max-sm:w-[90%] max-sm:flex-col">
+                <div className="flex justify-center gap-[3rem] w-[90%] max-sm:flex-col">
+                    <div className="flex flex-col max-sm:gap-[0rem] gap-[1rem] max-sm:items-center items-center w-[20%] max-sm:w-[100%] max-sm:flex-col">
                         {/* <div className=" "> */}
 
                         
@@ -64,7 +64,7 @@ const Zillow = ({ saves, location, zillowViews }) => {
 
                     </div>
 
-                    <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[50%] max-sm:w-[90%] max-sm:flex-col">
+                    <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[50%] max-sm:w-[100%] max-sm:flex-col">
                         <GraphaSection h={200} w={400} heading="Zillow Views" isComponent={true} views={zillowViews} displayBtn={true} saves={saves}  />
                     </div>
                 </div>

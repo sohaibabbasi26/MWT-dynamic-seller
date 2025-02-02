@@ -10,7 +10,7 @@ const Footer = ({location}) => {
                         <Image src="/MWT_logo.png" className="max-sm:h-[120px] max-sm:w-[230px]" height={130} width={130} alt="Logo" />
 
                         <div className="flex gap-2 max-sm:flex-col max-sm:gap-4 pt-[1rem]">
-                            <Image height={120} width={120} src="/logo1.png" alt="/logo1" />
+                            {/* <Image height={120} width={120} src="/logo1.png" alt="/logo1" /> */}
                             <Image height={120} width={120} src="/logo2.png" alt="/logo2" />
                             <Image height={120} width={120} src="/logo3.png" alt="/logo3" />
                         </div>

@@ -13,11 +13,11 @@ const DynamicVideoContent = ({ isLeftFlow, header, content, videoUrl, isYoutube,
     return (
         <>
             <div className="flex justify-center items-center h-auto py-4 bg-white">
-                <div className="w-[95%] h-[100%] flex gap-[1rem] items-center max-sm:flex-col">
+                <div className="w-[95%] max-sm:w-[92%] h-[100%] flex gap-[1rem] items-center max-sm:flex-col">
 
                     {isLeftFlow ? (
                         <>
-                            <div className="w-[45%] h-auto flex flex-col gap-[0.5rem] justify-center py-3 px-6 max-sm:h-auto max-sm:w-full" >
+                            <div className="w-[45%] h-auto flex flex-col gap-[0.5rem] justify-center py-3 px-6 max-sm:px-0 max-sm:h-auto max-sm:w-full" >
                                 <h2 className="text-blueBack font-redhat text-[3rem] font-semibold max-sm:text-center max-sm:w-full max-sm:text-[1.8rem]">
                                     {header}
                                 </h2>
@@ -78,7 +78,7 @@ const DynamicVideoContent = ({ isLeftFlow, header, content, videoUrl, isYoutube,
                                 )}
                             </div>
 
-                            <div className="w-[45%] h-[70vh] flex flex-col gap-[0.5rem] justify-center py-3 px-6 max-sm:h-auto max-sm:w-full" >
+                            <div className="w-[45%] h-[70vh] flex flex-col gap-[0.5rem] justify-center py-3 px-6 max-sm:px-0  max-sm:h-auto max-sm:w-full" >
                                 <h2 className="text-blueBack font-redhat text-[3rem] font-semibold max-sm:text-center max-sm:w-full max-sm:text-[1.8rem]">
                                     {header}
                                 </h2>

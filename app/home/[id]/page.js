@@ -16,6 +16,7 @@ import ContactForm from "../../components/HomePageComponents/ContactForm";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setListing } from "@/app/redux/slices/listingSlice";
+import Link from "next/link";
 // import PropertyBrochure from "@/app/components/HomePageComponents/Brochure";
 
 const HomePage = () => {
@@ -23,6 +24,7 @@ const HomePage = () => {
     const [listingData, setListingData] = useState(null);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+    const isSection = true;
 
     const { data } = useSelector((state) =>
         state.listing
@@ -134,12 +136,12 @@ const HomePage = () => {
     </>
 
     const secondVidSectionContent = <>
-        <p className="text-blueBack font-redhat text-sm font-semibold max-sm:text-center">
+        <p className="text-blueBack font-redhat max-sm:text-[16px] text-sm font-semibold max-sm:text-center mb-[1rem]">
             BrightMLS provides a centralized platform where we list properties, access extensive property data, and collaborate with other agents to streamline buying and selling processes. It offers tools and resources to improve property marketing, ensure accurate listings, and enhance client service, ultimately making real estate transactions more efficient and transparent.
         </p>
 
         <div className="flex justify-start w-full h-full gap-[1rem]">
-            <div className="flex flex-col gap-[1rem] max-sm:items-center items-start w-[100%] max-sm:w-[90%] max-sm:flex-col">
+            <div className="flex flex-col gap-[1rem] max-sm:items-center items-start w-[100%] max-sm:w-[100%] max-sm:flex-col">
                 <GraphaSection h={150} w={300} heading="Bright MLS Views" isComponent={true} views={data?.mlsViews} displayBtn={true} saves={2} />
             </div>
         </div>
@@ -152,7 +154,7 @@ const HomePage = () => {
         </p>
 
         <div className="max-sm:flex max-sm:justify-center">
-            <button className="bg-blueBack px-6 py-2 rounded-md text-sm text-white font-redhat max-sm:w-full">Visit Channel</button>
+            <Link href="https://www.youtube.com/@themikewebbteam4847" className="bg-blueBack text-center px-6 py-2 rounded-md text-sm text-white font-redhat max-sm:w-full">Visit Channel</Link>
         </div>
     </>
 
@@ -172,7 +174,7 @@ const HomePage = () => {
 
             <div className="w-full flex justify-center">
                 <div className="w-[95%]">
-                    <GraphaSection h={200} w={400} isComponent={false} heading="Over All Views" views={data?.views || 0} saves={data?.saves || 0} displayBtn={false} />
+                    <GraphaSection isSection={true} h={200} w={400} isComponent={false} heading="Over All Views" views={data?.views || 0} saves={data?.saves || 0} displayBtn={false} />
                 </div>
             </div>
 

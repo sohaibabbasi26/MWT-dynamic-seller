@@ -805,8 +805,7 @@ const AdminPage = () => {
                                     <>
                                         {fbPosts?.map((post, index) => (
                                             <div onClick={() => toggleFbPostSelection(post)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
-            ${selectedFbPostIds.includes(post.id) ? "border-blue-500 bg-blue-100" : "border-black"}
-        `}>
+                                                ${selectedFbPostIds.some((selectedPost) => selectedPost.id === post.id) ? "border-blue-500 bg-blue-100" : "border-black"}`}>
                                                 <div className="mb-[1rem]">
                                                     <span className="text-black font-xl font-bold ">POSTED ON:</span>
                                                     <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.created_time)}</span>
