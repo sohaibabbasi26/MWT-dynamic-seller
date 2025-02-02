@@ -10,12 +10,7 @@ import { useEffect, useState } from "react";
 const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
     const imagesToShow = uploaded_images?.slice(0, 3) || [];
 
-    // console.log("[images to show]:",uploaded_images);
-    // console.log("[SOCIAL CAMPAIGN LINKS]:",socialCampaignLinks);
 
-    // const facebookListings = socialCampaignsLinks?.fb;
-    // const instagramListings = socialCampaignsLinks?.ig;
-    // const emailBlastLinks = socialCampaignsLinks?.email_blast
     const [facebookListings, setFacebookListings] = useState([]);
     const [instagramListings, setInstagramListings] = useState([]);
     const [emailBlastListings, setEmailBlastListings] = useState([]);
@@ -34,6 +29,10 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
         }
     }, [facebookListings,instagramListings,emailBlastListings]);
 
+    useEffect(() => {
+        console.log("[imagesToShow]:", imagesToShow);
+    }, [imagesToShow]);
+
     const getCircularImage = (index) => {
         if (uploaded_images?.length > 0) {
             return uploaded_images[index % uploaded_images.length]; // Cycles images
@@ -41,10 +40,19 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
         return null;
     };
 
+
+    const getRandomImage = () => {
+        if (uploaded_images?.length > 0) {
+            const randomIndex = Math.floor(Math.random() * uploaded_images.length);
+            return uploaded_images[randomIndex];
+        }
+        return null;
+    };
+
     const allListings = [
-        ...facebookListings?.map((url, index) => ({ url, platform: "Facebook", icon: FbIcon, image: getCircularImage(index) })),
-        ...instagramListings?.map((url, index) => ({ url, platform: "Instagram", icon: IgIcon, image: getCircularImage(index) })),
-        ...emailBlastListings?.map((url, index) => ({ url, platform: "Email Blast", icon: EmailBlastIcon, image: getCircularImage(index) }))
+        ...facebookListings?.map((url, index) => ({ url, platform: "Facebook", icon: FbIcon, image: getRandomImage() })),
+        ...instagramListings?.map((url, index) => ({ url, platform: "Instagram", icon: IgIcon, image: getRandomImage()})),
+        ...emailBlastListings?.map((url, index) => ({ url, platform: "Email Blast", icon: EmailBlastIcon, image: getRandomImage() }))
     ];
 
     return (
