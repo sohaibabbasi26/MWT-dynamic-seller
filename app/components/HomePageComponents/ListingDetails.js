@@ -5,6 +5,8 @@ import Location from "../../../public/location.svg";
 import DemoHouseImage from "../../../public/youtube.png"
 import Image from "next/image";
 import { useEffect, useState } from "react";
+// import { Link } from "facebook-nodejs-business-sdk";
+import Link from "next/link";
 
 
 
@@ -86,9 +88,9 @@ const ListingDetails = ({ features, contactFormHeader }) => {
                                 </>
                             )}
 
-                            <button className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">
+                            <Link href="https://www.zillow.com/profile/Mike-Webb6" className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">
                                 See more
-                            </button>
+                            </Link>
                         </div>
                     </div>
 

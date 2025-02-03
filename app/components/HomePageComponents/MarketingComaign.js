@@ -29,17 +29,12 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
         }
     }, [facebookListings,instagramListings,emailBlastListings]);
 
-    useEffect(() => {
-        console.log("[imagesToShow]:", imagesToShow);
-    }, [imagesToShow]);
-
     const getCircularImage = (index) => {
         if (uploaded_images?.length > 0) {
-            return uploaded_images[index % uploaded_images.length]; // Cycles images
+            return uploaded_images[index % uploaded_images.length]; 
         }
         return null;
     };
-
 
     const getRandomImage = () => {
         if (uploaded_images?.length > 0) {

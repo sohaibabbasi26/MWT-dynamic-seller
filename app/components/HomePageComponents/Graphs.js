@@ -72,11 +72,11 @@ const GraphaSection = ({isSection, views, saves, displayBtn, isComponent, headin
 
                     <div className="text-white mt-4 text-center flex flex-col items-center">
                         <div className="flex gap-2">
-                            <p>
-                                <span className="text-orangeBack font-semibold">{views}</span> Views
+                            <p className={` ${isSection ? "text-[1.5rem]" : ""}`}>
+                                <span className={`text-orangeBack ${isSection ? "text-[2rem]" : ""} font-semibold`}>{views}</span> Views
                             </p>
                         </div>
-                        <p className="mt-2 font-bold">
+                        <p className={`mt-2 font-bold text-white ${isSection ? "text-[1.5rem]" : ""}`}>
                             {views} Views of {date}
                         </p>
                     </div>
