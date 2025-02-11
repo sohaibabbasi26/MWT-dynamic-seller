@@ -12,11 +12,17 @@ const AdminPage = () => {
     const [thirdResponse, setThirdResponse] = useState(false);
     const [fourthResponse, setFourthResponse] = useState(false);
     const [fifthResponse, setFifthResponse] = useState(false);
+    const [sixthResponse, setSixthResponse] = useState(false);
+    const [seventhResponse, setSeventhResponse] = useState(false);
     const [listingId, setListingId] = useState(false);
     const [igPosts, setIgPosts] = useState(null);
     const [fbPosts, setFbPosts] = useState(false);
     const [selectedPostIds, setSelectedPostIds] = useState([]);
     const [selectedFbPostIds, setSelectedFbPostIds] = useState([]);
+    const [brochureImages, setBrochureImages] = useState([]);
+    const [brochureDescriptions, setBrochureDescriptions] = useState([]);
+    const [brochureVideo, setBrochureVideo] = useState(null);
+
 
     const [formData, setFormData] = useState({
         location: "",
@@ -29,6 +35,10 @@ const AdminPage = () => {
         interested_buyers: 0,
         saves: 0,
         features: { beds: 0, baths: 0, square_fit: 0, address: "", pricing: "", discountPercentage: "", city: "" },
+        brochure: {
+            pictures: [{ uri: "", description: "" }],
+            video: ""
+        },
         socialCampaignsLinks: { fb: [], ig: [], email_blast: [] },
         contact_form_header: "",
         reviews: [{ name: "", rating: 0, comment: "" }],
@@ -380,8 +390,89 @@ const AdminPage = () => {
         console.log("[SELECTED POST IDS]:", selectedPostIds);
         console.log("[SELECTED FB POST IDS]:", selectedFbPostIds);
         // selectedFbPostIds
-    }, [selectedPostIds, selectedFbPostIds])
+    }, [selectedPostIds, selectedFbPostIds]);
 
+
+    const handleBrochureImageUpload = (e) => {
+        const files = Array.from(e.target.files);
+        setBrochureImages(files);
+    };
+
+    const handleBrochureDescriptionChange = (index, value) => {
+        const updatedDescriptions = [...brochureDescriptions];
+        updatedDescriptions[index] = value;
+        setBrochureDescriptions(updatedDescriptions);
+    };
+
+    const handleBrochureVideoUpload = (e) => {
+        setBrochureVideo(e.target.files[0]);
+    };
+
+    const submitBrochureImages = async () => {
+        if (brochureImages.length === 0) {
+            console.error('No images selected for the brochure');
+            return;
+        }
+
+        const formDataToSend = new FormData();
+        formDataToSend.append('listing_id', listingId);
+        formDataToSend.append('imagesText', JSON.stringify(brochureDescriptions));
+
+        console.log("[LISTING BROCHURE IMAGES]:", brochureDescriptions);
+
+        brochureImages.forEach((file, index) => {
+            formDataToSend.append(`brochure_images[${index}]`, file);
+        });
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/upload-brochure-images`, {
+                method: 'PUT',
+                body: formDataToSend,
+            });
+
+            const data = await response.json();
+            console.log("[BROCHURE IMAGES DATA RESPONSE]:", data);
+
+            if (response.ok) {
+                alert('Brochure images uploaded successfully!');
+                setSixthResponse(true);
+            } else {
+                console.error("[ERROR IN BROCHURE IMAGES RESPONSE]:", data.message);
+            }
+        } catch (err) {
+            console.error("[BROCHURE IMAGES UPLOAD ERROR]:", err);
+        }
+    };
+
+    const submitBrochureVideo = async () => {
+        if (!brochureVideo) {
+            console.error('No video selected for the brochure');
+            return;
+        }
+
+        const formDataToSend = new FormData();
+        formDataToSend.append('listing_id', listingId);
+        formDataToSend.append('brochure_video', brochureVideo);
+
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/upload-brochure-video`, {
+                method: 'PUT',
+                body: formDataToSend,
+            });
+
+            const data = await response.json();
+            console.log("[BROCHURE VIDEO DATA RESPONSE]:", data);
+
+            if (response.ok) {
+                alert('Brochure video uploaded successfully!');
+                setSeventhResponse(true);
+            } else {
+                console.error("[ERROR IN BROCHURE VIDEO RESPONSE]:", data.message);
+            }
+        } catch (err) {
+            console.error("[BROCHURE VIDEO UPLOAD ERROR]:", err);
+        }
+    };
 
     return (
         <div className="p-6">
@@ -405,6 +496,12 @@ const AdminPage = () => {
                         </li>
                         <li>
                             <span className="font-bold">STEP 5:</span> Select the insta and fb posts you want to use for this one listing, and submit. (For automatic generation of listing engagement, enterested buyers and social media views values.)
+                        </li>
+                        <li>
+                            <span className="font-bold">STEP 6:</span> Upload brochure images with descriptions. Ensure each image is described properly, then submit and wait for the next step to be enabled.
+                        </li>
+                        <li>
+                            <span className="font-bold">STEP 7:</span> Upload the brochure video (not more than 10MB). Once uploaded, copy the listing link before refreshing the page.
                         </li>
                     </ul>
 
@@ -615,9 +712,6 @@ const AdminPage = () => {
                     </div>
 
                     <div className="space-y-3">
-
-
-
                         <h3 className="text-lg font-semibold text-black">Social Campaign Links</h3>
 
                         <h3 className="text-black font-semibold">Facebook Links</h3>
@@ -828,7 +922,67 @@ const AdminPage = () => {
                     )}
 
 
+
+
+                    {/* File Uploads */}
+
                     {fifthResponse && (
+                        <>
+                            <h1 className="text-3xl font-bold mb-4 text-black">STEP 6: Upload Brochure Images</h1>
+
+                            <input
+                                type="file"
+                                accept="image/*"
+                                multiple
+                                onChange={handleBrochureImageUpload}
+                                className="block w-full p-2 border rounded text-black mb-4"
+                            />
+
+                            {brochureImages.map((image, index) => (
+                                <div key={index} className="mb-4">
+                                    <p className="text-black">Image {index + 1}: {image.name}</p>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter description for this image"
+                                        value={brochureDescriptions[index] || ''}
+                                        onChange={(e) => handleBrochureDescriptionChange(index, e.target.value)}
+                                        className="block w-full p-2 border rounded text-black"
+                                    />
+                                </div>
+                            ))}
+
+                            <button
+                                type="button"
+                                onClick={submitBrochureImages}
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mb-8"
+                            >
+                                Submit Brochure Images
+                            </button>
+
+                            {sixthResponse && (
+                                <>
+                                    <h1 className="text-3xl font-bold mb-4 text-black">STEP 7: Upload Brochure Video</h1>
+
+                                    <input
+                                        type="file"
+                                        accept="video/*"
+                                        onChange={handleBrochureVideoUpload}
+                                        className="block w-full p-2 border rounded text-black mb-4"
+                                    />
+
+                                    <button
+                                        type="button"
+                                        onClick={submitBrochureVideo}
+                                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    >
+                                        Submit Brochure Video
+                                    </button>
+                                </>
+                            )}
+                        </>
+                    )}
+
+                    {seventhResponse && (
                         <>
                             <h3 className="text-black font-semibold">Make sure to copy thus link before refreshing.</h3>
 
@@ -837,14 +991,9 @@ const AdminPage = () => {
                             </p>
                         </>
                     )}
-
-                    {/* File Uploads */}
-
-
-
                 </form>
             </div>
-        // </div>
+        </div>
     );
 };
 

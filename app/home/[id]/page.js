@@ -17,11 +17,14 @@ import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setListing } from "@/app/redux/slices/listingSlice";
 import Link from "next/link";
+import Brochure from "@/app/components/HomePageComponents/Brochure";
+import BrochureSlider from "@/app/components/HomePageComponents/Brochure";
 // import PropertyBrochure from "@/app/components/HomePageComponents/Brochure";
 
 const HomePage = () => {
     const { id } = useParams();
     const [listingData, setListingData] = useState(null);
+    const [brochureData, setBrochureData] = useState(null);
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
     const isSection = true;
@@ -34,6 +37,16 @@ const HomePage = () => {
         console.log("[DATA]:", data);
     }, [data]);
 
+    const mergeImagesAndText = (data) => {
+        console.log("[DATA IN MERGING METHOD]:",data);
+        const { images, imagesText } = data;
+        const mergedArray = images.map((image, index) => ({
+            image,
+            text: imagesText[index] || ""
+        }));
+        return mergedArray;
+    };
+
     const fetchListingInfo = async () => {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/get-listing/${id}`, {
@@ -41,10 +54,24 @@ const HomePage = () => {
             });
             const data = await response.json();
             console.log("[LISTING DATA]:", data);
+
             // setListingData(data);
             dispatch(setListing(data));
+            const mergedData = mergeImagesAndText(data?.data?.brochure);
+            console.log("[MERGED DATA]:",mergedData);
+            const brochureUpdatedDataObject = {
+                imagesData: mergedData,
+                video: data?.data?.brochure?.video
+            }
+            setBrochureData(brochureUpdatedDataObject);
+
+            console.log("[BROCHURE DATA]:",brochureUpdatedDataObject);
+
             if (listingData) {
                 console.log("[LISTING DATA in state]:", listingData);
+                const mergedData = mergeImagesAndText(listingData?.data?.brochure);
+                console.log("[MERGED DATA]:",mergedData);
+                
             }
             setLoading(false);
         } catch (err) {
@@ -209,10 +236,12 @@ const HomePage = () => {
                 isYoutube={true}
             />
 
-            
+
             {/* <PropertyBrochure /> */}
 
             <ContactForm />
+
+            <BrochureSlider images={brochureData?.imagesData} video={brochureData?.video} />
 
             <Testimonials data={data} />
 

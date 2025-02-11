@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import { HeroContext, HeroProvider } from "./context/HeroContxt";
 import{store} from "./redux/store";
 import { Provider } from "react-redux";
+// import 'swiper/swiper.min.css';
 
 
 export default function RootLayout({ children }) {
