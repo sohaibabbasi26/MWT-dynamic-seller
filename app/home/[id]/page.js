@@ -57,20 +57,20 @@ const HomePage = () => {
 
             // setListingData(data);
             dispatch(setListing(data));
-            const mergedData = mergeImagesAndText(data?.data?.brochure);
-            console.log("[MERGED DATA]:",mergedData);
-            const brochureUpdatedDataObject = {
-                imagesData: mergedData,
-                video: data?.data?.brochure?.video
-            }
-            setBrochureData(brochureUpdatedDataObject);
+            // const mergedData = mergeImagesAndText(data?.data?.brochure);
+            // console.log("[MERGED DATA]:",mergedData);
+            // const brochureUpdatedDataObject = {
+            //     imagesData: mergedData,
+            //     video: data?.data?.brochure?.video
+            // }
+            // setBrochureData(brochureUpdatedDataObject);
 
-            console.log("[BROCHURE DATA]:",brochureUpdatedDataObject);
+            // console.log("[BROCHURE DATA]:",brochureUpdatedDataObject);
 
             if (listingData) {
                 console.log("[LISTING DATA in state]:", listingData);
-                const mergedData = mergeImagesAndText(listingData?.data?.brochure);
-                console.log("[MERGED DATA]:",mergedData);
+                // const mergedData = mergeImagesAndText(listingData?.data?.brochure);
+                // console.log("[MERGED DATA]:",mergedData);
                 
             }
             setLoading(false);
@@ -241,7 +241,7 @@ const HomePage = () => {
 
             <ContactForm />
 
-            <BrochureSlider images={brochureData?.imagesData} video={brochureData?.video} />
+            <BrochureSlider canvaLink={data?.brochure} />
 
             <Testimonials data={data} />
 

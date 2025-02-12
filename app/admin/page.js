@@ -35,10 +35,7 @@ const AdminPage = () => {
         interested_buyers: 0,
         saves: 0,
         features: { beds: 0, baths: 0, square_fit: 0, address: "", pricing: "", discountPercentage: "", city: "" },
-        brochure: {
-            pictures: [{ uri: "", description: "" }],
-            video: ""
-        },
+        brochure: "",
         socialCampaignsLinks: { fb: [], ig: [], email_blast: [] },
         contact_form_header: "",
         reviews: [{ name: "", rating: 0, comment: "" }],
@@ -533,6 +530,16 @@ const AdminPage = () => {
                         className="block w-full p-2 border rounded text-black"
                     />
 
+                    <h3 className="text-black font-semibold">Brochure Canva Link</h3>
+                    <input
+                        type="text"
+                        name="brochure"
+                        placeholder="Brochure canva link"
+                        value={formData.brochure}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
                     {/* <h3 className="text-black font-semibold">Visitors</h3>
                     <input
                         type="number"
@@ -926,7 +933,7 @@ const AdminPage = () => {
 
                     {/* File Uploads */}
 
-                    {fifthResponse && (
+                    {/* {fifthResponse && (
                         <>
                             <h1 className="text-3xl font-bold mb-4 text-black">STEP 6: Upload Brochure Images</h1>
 
@@ -980,9 +987,9 @@ const AdminPage = () => {
                                 </>
                             )}
                         </>
-                    )}
+                    )} */}
 
-                    {seventhResponse && (
+                    {fifthResponse && (
                         <>
                             <h3 className="text-black font-semibold">Make sure to copy thus link before refreshing.</h3>
 
