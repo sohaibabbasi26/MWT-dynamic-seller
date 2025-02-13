@@ -494,12 +494,6 @@ const AdminPage = () => {
                         <li>
                             <span className="font-bold">STEP 5:</span> Select the insta and fb posts you want to use for this one listing, and submit. (For automatic generation of listing engagement, enterested buyers and social media views values.)
                         </li>
-                        <li>
-                            <span className="font-bold">STEP 6:</span> Upload brochure images with descriptions. Ensure each image is described properly, then submit and wait for the next step to be enabled.
-                        </li>
-                        <li>
-                            <span className="font-bold">STEP 7:</span> Upload the brochure video (not more than 10MB). Once uploaded, copy the listing link before refreshing the page.
-                        </li>
                     </ul>
 
                     <p className="text-black pt-2 text-sm"><span className="font-bold">NOTE:</span> One step will be visible before the next one, complete one step and then wait for the next one.</p>

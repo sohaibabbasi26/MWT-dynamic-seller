@@ -35,7 +35,7 @@ const BrochureSlider = ({ canvaLink}) => {
           //     videoRef.current.pause();
           //     videoRef.current.currentTime = 0;
           //   }
-          // }}
+          // }} 
         >
           {/* {images?.map((src, index) => (
           <SwiperSlide key={index} className="flex justify-center overflow-hidden items-center rounded-2xl">

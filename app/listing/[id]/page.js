@@ -26,6 +26,7 @@ const IndividualListing = () => {
         listing_engagements: 0,
         interested_buyers: 0,
         saves: 0,
+        brochure: "",
         features: {
             beds: 0,
             baths: 0,
@@ -487,6 +488,16 @@ const IndividualListing = () => {
                             name="description"
                             placeholder="Description"
                             value={formData.description}
+                            onChange={handleChange}
+                            className="block w-full p-2 border rounded text-black"
+                        />
+
+                        <h3 className="text-black font-semibold">Brochure Canva Link</h3>
+                        <input
+                            type="text"
+                            name="brochure"
+                            placeholder="Brochure canva link"
+                            value={formData.brochure}
                             onChange={handleChange}
                             className="block w-full p-2 border rounded text-black"
                         />
