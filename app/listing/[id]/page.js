@@ -889,17 +889,16 @@ const IndividualListing = () => {
                                     <h1 className="text-3xl font-bold mb-4 text-black">SELECT FACEBOOK POSTS:</h1>
                                     {fbPosts?.length > 0 && (
                                         <>
-                                            {fbPosts?.map((post, index) => (
-                                                <div onClick={() => toggleFbPostSelection(post)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
-                                    ${selectedFbPostIds.includes(post.id) ? "border-blue-500 bg-blue-100" : "border-black"}
-                                `}>
-                                                    <div className="mb-[1rem]">
-                                                        <span className="text-black font-xl font-bold ">POSTED ON:</span>
-                                                        <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.created_time)}</span>
-                                                    </div>
-                                                    <p className="text-sm text-black line-clamp-3">{post?.message}</p>
+                                             {fbPosts?.map((post, index) => (
+                                            <div onClick={() => toggleFbPostSelection(post)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
+                                                ${selectedFbPostIds.some((selectedPost) => selectedPost.id === post.id) ? "border-blue-500 bg-blue-100" : "border-black"}`}>
+                                                <div className="mb-[1rem]">
+                                                    <span className="text-black font-xl font-bold ">POSTED ON:</span>
+                                                    <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.created_time)}</span>
                                                 </div>
-                                            ))}
+                                                <p className="text-sm text-black line-clamp-3">{post?.message}</p>
+                                            </div>
+                                        ))}
                                         </>
                                     )}
 
