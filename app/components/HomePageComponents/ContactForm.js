@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Map from "../../../public/Map.png";
+import Link from "next/link";
 
 const ContactForm = () => {
 
@@ -9,7 +10,44 @@ const ContactForm = () => {
         l_name: '',
         email: '',
         phone_no: ''
-    })
+    });
+    const [responseMessage, setResponseMessage] = useState("");
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    }
+
+    useEffect(() => {
+        console.log("[FORM DATA]:", formData);
+    }, [formData]);
+
+    const handleFormSubmit = async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/subscribe-to-instant-access`, {
+                method: "POST",
+                body: JSON.stringify({
+                    firstName: formData?.f_name,
+                    lastName: formData?.l_name,
+                    email: formData?.email,
+                    phoneNumber: formData?.phone_no
+                })
+            });
+
+            const data = await response.json();
+            if (data?.status === 200) {
+                setResponseMessage(data?.message);
+                return;
+            }
+            return;
+        } catch (err) {
+            console.log("[ERROR]:", err);
+            return;
+        }
+    }
 
     return (
         <>
@@ -17,34 +55,34 @@ const ContactForm = () => {
 
                 <div className="h-full w-[50%] max-sm:w-[100%] flex flex-col gap-[1rem]">
                     <h2 className="text-3xl max-sm:text-center text-white">
-                        Charming 2 Bedroom Cottage with Lush Garden in Arlington, VA
+                        Are you looking for a place to call HOME
                     </h2>
 
                     <p className="max-sm:text-center text-white">
-                        Enter your details for exclusive information on this listing
+                        Enter your details for exclusive information of the listings
                     </p>
 
                     <div className="flex justify-between w-[90%] gap-[1rem] max-sm:flex-col max-sm:w-full">
                         <div className="flex w-full flex-col text-white">
                             <label className="text-xs text-white">First Name</label>
-                            <input className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.f_name} />
+                            <input name="f_name" onChange={handleInputChange} className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.f_name} />
                         </div>
 
                         <div className="flex w-full flex-col">
                             <label className="text-xs text-white">Last Name</label>
-                            <input className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.l_name} />
+                            <input name="l_name" onChange={handleInputChange} className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.l_name} />
                         </div>
                     </div>
 
                     <div className="flex  justify-between w-[90%] gap-[1rem] max-sm:flex-col max-sm:w-full">
                         <div className="flex w-full flex-col text-white">
                             <label className="text-xs text-white">Email</label>
-                            <input className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.email} />
+                            <input name="email" onChange={handleInputChange} className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.email} />
                         </div>
 
                         <div className="flex w-full flex-col text-white">
                             <label className="text-xs text-white">Phone Number</label>
-                            <input className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.phone_no} />
+                            <input name="phone_no" onChange={handleInputChange} className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.phone_no} />
                         </div>
 
                     </div>
@@ -63,8 +101,16 @@ const ContactForm = () => {
                     </p>
 
                     <div>
-                        <button className="bg-orangeBack px-4 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">Get Instant Access</button>
+                        <button onClick={handleFormSubmit} className="bg-orangeBack px-4 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">Get Instant Access</button>
                     </div>
+
+                    {responseMessage ? (
+                        <p className="text-white">
+                            Submitted the form successfully!
+                        </p>
+                    ) : (
+                        <></>
+                    )}
 
                 </div>
 
@@ -78,7 +124,7 @@ const ContactForm = () => {
                     </p>
 
                     <div className="w-full h-[80%] rounded-2xl overflow-hidden">
-                        <Image className="w-full h-full" src={Map} width={200} height={2-0} />
+                        <Link href="https://www.google.com/maps/place/The+Mike+Webb+Team,+LLC+%7C+Mike+and+Claudia+Webb,+REALTORS+%7C+RE%2FMAX+Allegiance+%7C+VA,+MD,+DC/@38.846222,-77.1237549,15.98z/data=!3m1!5s0x89b7b41daf2f508f:0x508faa029328b837!4m6!3m5!1s0x89b7b39aca50d80d:0x1c21b9c2277b7b38!8m2!3d38.845551!4d-77.115142!16s%2Fg%2F11f5p5qqyk?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D"><Image className="w-full h-full" src={Map} width={200} height={2 - 0} /></Link>
                     </div>
                 </div>
 

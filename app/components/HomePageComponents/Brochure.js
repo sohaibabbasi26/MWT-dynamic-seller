@@ -12,7 +12,7 @@ const BrochureSlider = ({ canvaLink}) => {
     <div className='w-full flex flex-col items-center'>
 
       <h2 className='font-redhat text-[2rem] mt-[2rem] font-bold text-black'>
-        Property Brochure
+      Experience + Address of the Property
       </h2>
 
       <div className="w-[90%] relative mt-[2rem] h-full justify-center flex items-center max-sm:items-center max-sm:max-h-[40%] max-sm:w-[90%]">

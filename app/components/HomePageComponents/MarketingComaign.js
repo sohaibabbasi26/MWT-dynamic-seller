@@ -51,7 +51,7 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
     ];
 
     return (
-        <div className="h-auto w-full bg-blueBack flex flex-col items-center my-4 py-[2rem] font-redhat">
+        <section id="marketingC" className=" h-auto w-full bg-blueBack flex flex-col items-center my-4 py-[2rem] font-redhat">
             <div className="w-[90%] flex flex-col justify-center items-center gap-3">
                 <h2 className="text-[2rem] text-white">Marketing Campaigns</h2>
                 <p className="max-sm:text-center text-white">
@@ -119,7 +119,7 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
                     </div>
                 ))}
             </div> */}
-        </div>
+        </section>
     );
 };
 

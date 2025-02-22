@@ -38,7 +38,7 @@ const HomePage = () => {
     }, [data]);
 
     const mergeImagesAndText = (data) => {
-        console.log("[DATA IN MERGING METHOD]:",data);
+        console.log("[DATA IN MERGING METHOD]:", data);
         const { images, imagesText } = data;
         const mergedArray = images.map((image, index) => ({
             image,
@@ -71,7 +71,7 @@ const HomePage = () => {
                 console.log("[LISTING DATA in state]:", listingData);
                 // const mergedData = mergeImagesAndText(listingData?.data?.brochure);
                 // console.log("[MERGED DATA]:",mergedData);
-                
+
             }
             setLoading(false);
         } catch (err) {
@@ -169,7 +169,7 @@ const HomePage = () => {
 
         <div className="flex justify-start w-full h-full gap-[1rem]">
             <div className="flex flex-col gap-[1rem] max-sm:items-center items-start w-[100%] max-sm:w-[100%] max-sm:flex-col">
-                <GraphaSection h={150} w={300} heading="Bright MLS Views" isComponent={true} views={data?.mlsViews} displayBtn={true} saves={2} />
+                <GraphaSection displayBtn={false} h={150} w={300} heading="Bright MLS Views" isComponent={true} views={data?.mlsViews} saves={2} />
             </div>
         </div>
 
@@ -224,7 +224,9 @@ const HomePage = () => {
                 videoUrl={data?.uploaded_video_two}
             />
 
-            <ListingDetails features={data?.features} contactFormHeader={data?.contact_form_header} />
+            <BrochureSlider canvaLink={data?.brochure} />
+
+            <ListingDetails features={data?.features} uploaded_image={data?.uploaded_images[0]} contactFormHeader={data?.contact_form_header} />
 
             <MarketingCompaign socialCampaignsLinks={data?.socialCampaignsLinks} uploaded_images={data?.uploaded_images} />
 
@@ -236,12 +238,7 @@ const HomePage = () => {
                 isYoutube={true}
             />
 
-
-            {/* <PropertyBrochure /> */}
-
             <ContactForm />
-
-            <BrochureSlider canvaLink={data?.brochure} />
 
             <Testimonials data={data} />
 

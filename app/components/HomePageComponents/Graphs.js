@@ -19,7 +19,7 @@ const data = [
 
 const GraphaSection = ({isSection, views, saves, displayBtn, isComponent, heading, h, w }) => {
 
-    console.log("[IS COMPONENT STATE]:", isComponent);
+    console.log("[display button STATE]:", isComponent);
 
     const total = views + saves;
     const [date, setDate] = useState();
@@ -38,7 +38,7 @@ const GraphaSection = ({isSection, views, saves, displayBtn, isComponent, headin
 
     return (
         <>
-            <div className={`h-auto ${isSection ? "max-sm:mt-[2rem]" : "max-sm:mt-0"} mt-[2rem] max-sm:h-auto w-full flex gap-4 px- font-redhat max-sm:flex-col `}>
+            <section id="marketingM" className={`h-auto ${isSection ? "max-sm:mt-[2rem]" : "max-sm:mt-0"} mt-[2rem] max-sm:h-auto w-full flex gap-4 px- font-redhat max-sm:flex-col `}>
 
                 <div className={`bg-blueBack ${isComponent ? "py-[1rem]" : "p-[2rem]"}  w-[100%] max-sm:w-auto flex flex-col justify-center items-center rounded-3xl `}>
                     <h3 className="font-redhat text-2xl font-semibold max-sm:text-center text-white">{heading}</h3>
@@ -81,17 +81,17 @@ const GraphaSection = ({isSection, views, saves, displayBtn, isComponent, headin
                         </p>
                     </div>
 
-                    {displayBtn && (
+                    {displayBtn ? (
                         <>
                             <div className="w-[100%] max-sm:w-[90%] max-sm:mb-[1rem] flex justify-center mt-[1rem]">
                                 <Link href="https://www.zillow.com/" className="py-3 px-6 text-center w-[90%] bg-orangeBack text-blueBack rounded-xl font-redhat max-sm:w-[100%]">Visit Zillow</Link>
                             </div>
                         </>
-                    )}
+                    ) : (<></>)}
                 </div>
 
 
-            </div>
+            </section>
 
         </>
     )

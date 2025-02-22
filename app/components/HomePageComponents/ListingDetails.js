@@ -5,17 +5,13 @@ import Location from "../../../public/location.svg";
 import DemoHouseImage from "../../../public/youtube.png"
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import { Link } from "facebook-nodejs-business-sdk";
 import Link from "next/link";
 
-
-
-const ListingDetails = ({ features, contactFormHeader }) => {
+const ListingDetails = ({ features, contactFormHeader, uploaded_image }) => {
     const [discountedPrice, setDiscountedPrice] = useState(null);
 
     useEffect(() => {
         async function fetch() {
-            console.log("[fetaures]:", features);
             const discount = await calculateDiscount();
             setDiscountedPrice(discount);
         }
@@ -25,14 +21,10 @@ const ListingDetails = ({ features, contactFormHeader }) => {
     const calculateDiscount = async () => {
         try {
             const discountExp = features?.discountPercentage / 100;
-            console.log("[DISCOUNT PERCENTAGE]:", discountExp);
             const discountAmount = features?.pricing * discountExp;
-            console.log("[DISCOUNT AMOUNT]:", discountAmount);
             const finalAmount = features?.pricing - discountAmount;
-            console.log("[FINAL AMOUNT]:", finalAmount);
             return finalAmount;
         } catch (err) {
-            console.log("[ERROR]:", err);
             return;
         }
     }
@@ -96,7 +88,7 @@ const ListingDetails = ({ features, contactFormHeader }) => {
 
                     <div className="w-[50%] p-[2rem] h-full max-sm:w-[100%] max-sm:pt-0">
                         <div className=" h-full ">
-                            <Image className="h-full w-full" src={DemoHouseImage} height={200} width={200} />
+                            <Image className="h-full w-full rounded-xl" src={uploaded_image} height={200} width={200} />
                         </div>
                     </div>
                 </div>
