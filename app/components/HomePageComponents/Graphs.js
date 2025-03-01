@@ -84,7 +84,7 @@ const GraphaSection = ({isSection, views, saves, displayBtn, isComponent, headin
                     {displayBtn ? (
                         <>
                             <div className="w-[100%] max-sm:w-[90%] max-sm:mb-[1rem] flex justify-center mt-[1rem]">
-                                <Link href="https://www.zillow.com/" className="py-3 px-6 text-center w-[90%] bg-orangeBack text-blueBack rounded-xl font-redhat max-sm:w-[100%]">Visit Zillow</Link>
+                                <Link target="_blank" href="https://www.zillow.com/" className="py-3 px-6 text-center w-[90%] bg-orangeBack text-blueBack rounded-xl font-redhat max-sm:w-[100%]">Visit Zillow</Link>
                             </div>
                         </>
                     ) : (<></>)}

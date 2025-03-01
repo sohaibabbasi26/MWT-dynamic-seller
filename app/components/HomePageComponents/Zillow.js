@@ -5,7 +5,6 @@ const Zillow = ({ saves, location, zillowViews }) => {
 
     const radialData = [
         { name: "Views", value: zillowViews, fill: "#F68323" },
-        // { name: "Saves", value: saves, fill: "#FFE0C5" },
     ];
 
     
@@ -23,15 +22,11 @@ const Zillow = ({ saves, location, zillowViews }) => {
 
                 <div className="flex justify-center gap-[3rem] w-[90%] max-sm:flex-col">
                     <div className="flex flex-col max-sm:gap-[0rem] gap-[1rem] max-sm:items-center items-center w-[20%] max-sm:w-[100%] max-sm:flex-col">
-                        {/* <div className=" "> */}
-
-                        
 
                         <div className="w-[100%] mt-[2rem] h-full max-sm:w-[100%]  bg-blueBack rounded-3xl px-8 flex flex-col items-center justify-between max-sm:flex-col max-sm:h-full">
                             <div className="py-8 h-full flex flex-col justify-between max-sm:items-center">
                                 <div className="flex flex-col items-center gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
                                     <p className="font-redhat text-3xl max-sm:text-xl max-sm:font-semibold text-white">
-                                        {/* {data?.views} */}
                                         {zillowViews}
                                     </p>
 
@@ -46,7 +41,6 @@ const Zillow = ({ saves, location, zillowViews }) => {
                             <div className="py-8 h-full flex flex-col justify-between max-sm:items-center">
                                 <div className="flex flex-col items-center gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
                                     <p className="font-redhat text-3xl max-sm:text-xl max-sm:font-semibold text-white">
-                                        {/* {data?.listing_engagements} */}
                                         {saves}
                                     </p>
 
@@ -57,11 +51,7 @@ const Zillow = ({ saves, location, zillowViews }) => {
                                     Saves
                                 </p>
                             </div>
-
-                            {/* </div> */}
                         </div>
-
-
                     </div>
 
                     <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[50%] max-sm:w-[100%] max-sm:flex-col">

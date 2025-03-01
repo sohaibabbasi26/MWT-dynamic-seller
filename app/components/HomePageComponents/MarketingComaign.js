@@ -2,6 +2,7 @@ import FbIcon from "../../../public/fb.svg";
 import IgIcon from "../../../public/ig.svg";
 import EmailBlastIcon from "../../../public/emailBlast.svg";
 import GoTo from "../../../public/icons/gotoIcon.svg";
+import Link from "next/link";
 
 import Image from "next/image";
 import SocialMediaPost from "./SocialMediaPost";
@@ -58,15 +59,15 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
                     Our approach includes the following campaigns that highlight your property's most impressive features.
                 </p>
 
-                {/* <button className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] max-sm:w-[100%] font-redhat">
-                    Visit Zillow
-                </button> */}
+                <Link target="_blank" href="https://mikeandclaudiawebb.com/lss" className="max-sm:text-center bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] max-sm:w-[100%] font-redhat">
+                    Visit Properties
+                </Link>
             </div>
 
             <div className="w-[90%] h-full pt-[2rem] flex flex-wrap justify-center gap-6">
                 {allListings.map((listing, index) => (
                     listing.image && (
-                        <a key={index} href={listing.url} target="_blank" rel="noopener noreferrer"
+                        <Link target="_blank" key={index} href={listing.url} rel="noopener noreferrer"
                             className="w-[30%] max-sm:w-[100%] rounded-2xl overflow-hidden relative block">
                             <Image
                                 className="h-[15rem] w-full object-cover"
@@ -82,43 +83,10 @@ const MarketingCompaign = ({ uploaded_images, socialCampaignsLinks }) => {
                                 <span className="text-sm text-white">{listing.platform}</span>
                                 <Image src={GoTo} alt="Go To Icon" height={20} width={20} />
                             </div>
-                        </a>
+                        </Link>
                     )
                 ))}
             </div>
-
-
-
-            {/* <div className="w-[90%] h-full pt-[2rem] flex justify-between max-sm:flex-col max-sm:gap-6">
-                {imagesToShow.map((image, index) => (
-                    <div key={index} className="w-[30%] h-full max-sm:w-full rounded-2xl overflow-hidden relative">
-                        <Image className="h-[15rem] w-[50rem]" src={image} alt={`Marketing Image ${index + 1}`} height={200} width={200} />
-
-                        <div className="bg-blueBack px-3 py-1 rounded-full absolute bottom-2 left-2 flex gap-[0.5rem]">
-                            {index === 0 && (
-                                <>
-                                    <Image src={FbIcon} alt="Facebook" height={20} width={20} />
-                                    <span className="text-sm text-white">Facebook</span>
-                                </>
-                            )}
-                            {index === 1 && (
-                                <>
-                                    <Image src={IgIcon} alt="Instagram" height={20} width={20} />
-                                    <span className="text-sm text-white">Instagram</span>
-                                </>
-                            )}
-                            {index === 2 && (
-                                <>
-                                    <Image src={EmailBlastIcon} alt="Email Blast" height={20} width={20} />
-                                    <span className="text-sm text-white">Email Blast</span>
-                                </>
-                            )}
-
-                            <Image src={GoTo} alt="Go To Icon" height={20} width={20} />
-                        </div>
-                    </div>
-                ))}
-            </div> */}
         </section>
     );
 };

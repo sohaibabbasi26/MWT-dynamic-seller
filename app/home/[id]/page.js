@@ -116,7 +116,7 @@ const HomePage = () => {
             Here are the results so far
         </p>
 
-        <div className="w-full h-[30%] bg-blueBack rounded-2xl px-8 flex items-center justify-between max-sm:flex-col max-sm:h-full">
+        <div className="w-full h-[20%] bg-blueBack rounded-2xl px-8 flex items-center justify-between max-sm:flex-col max-sm:h-full">
             <div className="py-4 h-full flex flex-col justify-between max-sm:items-center">
                 <div className="flex items-center gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
                     <p className="font-redhat max-sm:text-xl max-sm:font-semibold text-white">
@@ -181,7 +181,7 @@ const HomePage = () => {
         </p>
 
         <div className="max-sm:flex max-sm:justify-center">
-            <Link href="https://www.youtube.com/@themikewebbteam4847" className="bg-blueBack text-center px-6 py-2 rounded-md text-sm text-white font-redhat max-sm:w-full">Visit Channel</Link>
+            <Link target="_blank" href="https://www.youtube.com/@themikewebbteam4847" className="bg-blueBack text-center px-6 py-2 rounded-md text-sm text-white font-redhat max-sm:w-full">Visit Channel</Link>
         </div>
     </>
 
@@ -224,7 +224,7 @@ const HomePage = () => {
                 videoUrl={data?.uploaded_video_two}
             />
 
-            <BrochureSlider canvaLink={data?.brochure} />
+            <BrochureSlider location={data?.location} canvaLink={data?.brochure} />
 
             <ListingDetails features={data?.features} uploaded_image={data?.uploaded_images[0]} contactFormHeader={data?.contact_form_header} />
 

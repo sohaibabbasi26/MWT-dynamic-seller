@@ -5,14 +5,14 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
-const BrochureSlider = ({ canvaLink}) => {
+const BrochureSlider = ({ location, canvaLink }) => {
   const videoRef = useRef(null);
 
   return (
     <div className='w-full flex flex-col items-center'>
 
-      <h2 className='font-redhat text-[2rem] mt-[2rem] font-bold text-black'>
-      Experience + Address of the Property
+      <h2 className='font-redhat text-[2rem] mt-[2rem] font-bold text-black max-sm:text-[1rem]'>
+        Experience {location}
       </h2>
 
       <div className="w-[90%] relative mt-[2rem] h-full justify-center flex items-center max-sm:items-center max-sm:max-h-[40%] max-sm:w-[90%]">
@@ -28,14 +28,14 @@ const BrochureSlider = ({ canvaLink}) => {
           modules={[Pagination, Navigation, Autoplay]}
           autoplay={false}
           className="mySwiper rounded-2xl"
-          // onSlideChange={(swiper) => {
-          //   if (swiper.activeIndex === images.length && videoRef.current) {
-          //     videoRef.current.play();
-          //   } else if (videoRef.current) {
-          //     videoRef.current.pause();
-          //     videoRef.current.currentTime = 0;
-          //   }
-          // }} 
+        // onSlideChange={(swiper) => {
+        //   if (swiper.activeIndex === images.length && videoRef.current) {
+        //     videoRef.current.play();
+        //   } else if (videoRef.current) {
+        //     videoRef.current.pause();
+        //     videoRef.current.currentTime = 0;
+        //   }
+        // }} 
         >
           {/* {images?.map((src, index) => (
           <SwiperSlide key={index} className="flex justify-center overflow-hidden items-center rounded-2xl">

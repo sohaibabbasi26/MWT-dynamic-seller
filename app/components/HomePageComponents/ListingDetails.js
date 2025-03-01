@@ -80,7 +80,7 @@ const ListingDetails = ({ features, contactFormHeader, uploaded_image }) => {
                                 </>
                             )}
 
-                            <Link href="https://www.zillow.com/profile/Mike-Webb6" className="bg-orangeBack px-6 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">
+                            <Link target="_blank" href="https://mikeandclaudiawebb.com/lss" className="bg-orangeBack max-sm:text-center px-6 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">
                                 See more
                             </Link>
                         </div>

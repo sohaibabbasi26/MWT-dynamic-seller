@@ -14,7 +14,7 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
         <>
             <div className="h-auto pt-[4rem] max-sm:pt-[5rem] w-full bg-blueBack flex justify-center ">
                 <div className="w-[90%] h-[100%] max-sm:items-center flex flex-col items-center justify-center">
-                    <div className="w-[60%] px-10 h-[100%] flex flex-col items-center justify-center max-sm:items-center max-sm:w-[100%]">
+                    <div className="w-[60%] py-12 px-10 h-[100%] flex flex-col items-center justify-center max-sm:items-center max-sm:w-[100%]">
                         <h1 className="text-white text-center text-[3.5rem] w-[80%] font-redhat max-sm:text-[2rem] max-sm:text-center max-sm:w-full ">
                             {title}
                         </h1>
@@ -22,16 +22,11 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                         <p className="text-white text-center font-redhat text-[16px] w-[90%] max-sm:w-[95%] max-sm:text-center">
                             {description}
                         </p>
-
-
                     </div>
-
-
 
                     <div className="w-[90%] mt-[2rem] h-full flex items-center max-sm:items-center max-sm:max-h-[40%] max-sm:w-[90%] " >
                         <Slideshow images={images} />
                     </div>
-
 
                     <>
                         <div className="bg-[rgba(255,255,255,0.1)] max-sm:flex-col flex justify-between p-4 w-[90%] my-[3rem] rounded-lg border-[1px] border-orangeBack max-sm:w-[95%]">
@@ -65,20 +60,9 @@ const HeroSection = ({ title, description, location, visitors, lastUpdated, imag
                                 </div>
                             </div>
                         </div>
-                        {/* </div> */}
                     </>
-                    {/* ) : (
-                            <></>
-                        )} */}
-
                 </div>
-
-
-
             </div>
-            {/* )} */}
-
-
         </>
     )
 }

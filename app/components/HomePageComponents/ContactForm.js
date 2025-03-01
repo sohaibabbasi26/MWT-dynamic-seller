@@ -12,6 +12,8 @@ const ContactForm = () => {
         phone_no: ''
     });
     const [responseMessage, setResponseMessage] = useState("");
+    const [isSubmitClick, setIsSubmitClicked] = useState(false);
+    const isFormValid = formData.f_name && formData.l_name && formData.email && formData.phone_no;
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -25,24 +27,35 @@ const ContactForm = () => {
         console.log("[FORM DATA]:", formData);
     }, [formData]);
 
+
+
+
     const handleFormSubmit = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/subscribe-to-instant-access`, {
-                method: "POST",
-                body: JSON.stringify({
-                    firstName: formData?.f_name,
-                    lastName: formData?.l_name,
-                    email: formData?.email,
-                    phoneNumber: formData?.phone_no
-                })
-            });
+            setIsSubmitClicked(true);
+            
 
-            const data = await response.json();
-            if (data?.status === 200) {
-                setResponseMessage(data?.message);
+            if (isFormValid) {
+                
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/subscribe-to-instant-access`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                        firstName: formData?.f_name,
+                        lastName: formData?.l_name,
+                        email: formData?.email,
+                        phoneNumber: formData?.phone_no
+                    })
+                });
+
+                const data = await response.json();
+                if (data?.status === 200) {
+                    setResponseMessage(data?.message);
+                    return;
+                }
+                return;
+            } else {
                 return;
             }
-            return;
         } catch (err) {
             console.log("[ERROR]:", err);
             return;
@@ -55,7 +68,7 @@ const ContactForm = () => {
 
                 <div className="h-full w-[50%] max-sm:w-[100%] flex flex-col gap-[1rem]">
                     <h2 className="text-3xl max-sm:text-center text-white">
-                        Are you looking for a place to call HOME
+                        Are you looking for a place to call HOME?
                     </h2>
 
                     <p className="max-sm:text-center text-white">
@@ -84,7 +97,6 @@ const ContactForm = () => {
                             <label className="text-xs text-white">Phone Number</label>
                             <input name="phone_no" onChange={handleInputChange} className="px-3 py-2 w-[100%] rounded-lg border-orangeBack border-2 bg-[rgba(255,255,255,0.1)] text-white" value={formData.phone_no} />
                         </div>
-
                     </div>
 
                     <p className="text-sm font-redhat flex gap-[0.3rem] max-sm:justify-center max-sm:w-[100%] text-white">
@@ -103,6 +115,12 @@ const ContactForm = () => {
                     <div>
                         <button onClick={handleFormSubmit} className="bg-orangeBack px-4 py-2 rounded-md text-sm text-[#172243] font-redhat max-sm:w-[100%]">Get Instant Access</button>
                     </div>
+
+                    {isSubmitClick && !isFormValid ? (
+                        <p className="text-white">
+                            Please fill in all the fields to subscribe.
+                        </p>
+                    ) : <></>}
 
                     {responseMessage ? (
                         <p className="text-white">
@@ -124,7 +142,7 @@ const ContactForm = () => {
                     </p>
 
                     <div className="w-full h-[80%] rounded-2xl overflow-hidden">
-                        <Link href="https://www.google.com/maps/place/The+Mike+Webb+Team,+LLC+%7C+Mike+and+Claudia+Webb,+REALTORS+%7C+RE%2FMAX+Allegiance+%7C+VA,+MD,+DC/@38.846222,-77.1237549,15.98z/data=!3m1!5s0x89b7b41daf2f508f:0x508faa029328b837!4m6!3m5!1s0x89b7b39aca50d80d:0x1c21b9c2277b7b38!8m2!3d38.845551!4d-77.115142!16s%2Fg%2F11f5p5qqyk?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D"><Image className="w-full h-full" src={Map} width={200} height={2 - 0} /></Link>
+                        <Link target="_blank" href="https://www.google.com/maps/place/The+Mike+Webb+Team,+LLC+%7C+Mike+and+Claudia+Webb,+REALTORS+%7C+RE%2FMAX+Allegiance+%7C+VA,+MD,+DC/@38.846222,-77.1237549,15.98z/data=!3m1!5s0x89b7b41daf2f508f:0x508faa029328b837!4m6!3m5!1s0x89b7b39aca50d80d:0x1c21b9c2277b7b38!8m2!3d38.845551!4d-77.115142!16s%2Fg%2F11f5p5qqyk?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D"><Image className="w-full h-full" src={Map} width={200} height={2 - 0} /></Link>
                     </div>
                 </div>
 

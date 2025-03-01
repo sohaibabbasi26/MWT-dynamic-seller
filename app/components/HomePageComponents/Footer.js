@@ -6,6 +6,12 @@ import { useState } from "react";
 const Footer = ({ location }) => {
 
     const [email, setEmail] = useState("");
+    const [scheduleCallClick, setScheduleCallClick] = useState(false);
+    const [responseMessage, setResponseMessage] = useState('');
+
+    const toggleScheduleClick = () => {
+        setScheduleCallClick(!scheduleCallClick);
+    }
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -28,12 +34,15 @@ const Footer = ({ location }) => {
                 body: JSON.stringify({ email }),
             });
 
-            if (response.ok) {
-                console.log("Thank you for subscribing!");
+            const data = await response?.json();
+            const message = data?.message
+
+            if (data.status === 200) {
+                setResponseMessage(message);
                 setEmail("");
                 return
             } else {
-                console.log("Failed to subscribe. Please try again.");
+                setResponseMessage(message);
                 return
             }
         } catch (error) {
@@ -41,6 +50,8 @@ const Footer = ({ location }) => {
             return;
         }
     };
+
+
 
     return (
         <>
@@ -64,21 +75,20 @@ const Footer = ({ location }) => {
                             </h2>
 
                             <div className="w-full h-full flex gap- max-sm:flex-col max-sm:items-center">
-                                <div className="w-[50%] ">
+                                <div className="w-[50%]">
                                     <ul className="text-sm max-sm:text-center">
-                                        <li className="py-1 cursor-pointer text-white"><Link href="https://mikeandclaudiawebb.com/RealtorWebPage">About</Link></li>
-                                        <li className="py-1 cursor-pointer text-white"><Link href="https://mikeandclaudiawebb.com/Testimonials">Client Success Stories</Link></li>
-                                        <li className="py-1 cursor-pointer text-white"><Link href="#">Search for Homes</Link></li>
-                                        <li className="py-1 cursor-pointer text-white"><Link href="https://mikeandclaudiawebb.com/buyerexperience">Buyers</Link></li>
+                                        <li className="py-1 cursor-pointer text-white"><Link target="_blank" href="https://mikeandclaudiawebb.com/RealtorWebPage">About</Link></li>
+                                        <li className="py-1 cursor-pointer text-white"><Link target="_blank" href="https://mikeandclaudiawebb.com/Testimonials">Client Success Stories</Link></li>
+                                        <li className="py-1 cursor-pointer text-white"><Link target="_blank" href="#">Search for Homes</Link></li>
+                                        <li className="py-1 cursor-pointer text-white"><Link target="_blank" href="https://mikeandclaudiawebb.com/buyerexperience">Buyers</Link></li>
                                     </ul>
                                 </div>
 
                                 <div className="w-[50%]">
                                     <ul className="text-sm max-sm:text-center">
-                                        <li className="py-1 cursor-pointer text-white"><Link href="https://mikeandclaudiawebb.com/sellerexperience">Sellers</Link></li>
-                                        <li className="py-1 cursor-pointer text-white"><Link href="https://mikeandclaudiawebb.com/sellerexperience">Get Your Home's Value</Link></li>
-                                        <li className="py-1 cursor-pointer text-white"><Link href="https://mikeandclaudiawebb.com/MarketAnalysis">Get Your Home’s Value</Link></li>
-                                        <li className="py-1 cursor-pointer text-white">Schedule a Call: 703-350-3884</li>
+                                        <li className="py-1 cursor-pointer text-white"><Link target="_blank" href="https://mikeandclaudiawebb.com/sellerexperience">Sellers</Link></li>
+                                        <li className="py-1 cursor-pointer text-white"><Link target="_blank" href="https://mikeandclaudiawebb.com/MarketAnalysis">Get Your Home’s Value</Link></li>
+                                        <li onClick={toggleScheduleClick} className="py-1 cursor-pointer text-white">Schedule a Call{scheduleCallClick ? ": 703-350-3884" : ""}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -106,7 +116,7 @@ const Footer = ({ location }) => {
                                 </span>
                             </div>
 
-                            <div className="bg-[rgba(255,255,255,0.1)] flex justify-between p-2 w-[90%] my-[3rem] rounded-lg border-[1px] border-orangeBack max-sm:w-[95%]">
+                            <div className="bg-[rgba(255,255,255,0.1)] flex justify-between p-2 w-[90%] mt-[3rem] mb-[1rem] rounded-lg border-[1px] border-orangeBack max-sm:w-[95%]">
                                 <div className="flex gap-2 items-center">
                                     <Image src="/Letter.png" height={30} width={30} />
 
@@ -120,31 +130,37 @@ const Footer = ({ location }) => {
                                 </div>
 
                                 <button onClick={handleSubmit} className="bg-orangeBack px-8 py-2 rounded-md text-sm text-[#172243] font-redhat">Subscribe</button>
+
+                                
                             </div>
+
+                            {responseMessage && <p className="text-white text-center">
+                                    {responseMessage}
+                                </p>}
 
                         </div>
                     </div>
 
                 </div>
                 <div className="flex gap-4 mb-[1rem] max-sm:mt-[2rem]">
-                    <a href="https://web.facebook.com/themikewebbteam/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
+                    <Link href="https://web.facebook.com/themikewebbteam/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
                         <FaFacebookF />
-                    </a>
-                    <a href="https://www.instagram.com/themikewebbteam/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
+                    </Link>
+                    <Link href="https://www.instagram.com/themikewebbteam/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
                         <FaInstagram />
-                    </a>
-                    <a href="https://www.linkedin.com/in/mike-webb-278a83b/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
+                    </Link>
+                    <Link href="https://www.linkedin.com/in/mike-webb-278a83b/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
                         <FaLinkedinIn />
-                    </a>
-                    <a href="https://virginiahousingtrends.wordpress.com/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
+                    </Link>
+                    <Link href="https://virginiahousingtrends.wordpress.com/" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
                         <FaWordpress />
-                    </a>
-                    <a href="https://x.com/TheMikeWebbTea1" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
+                    </Link>
+                    <Link href="https://x.com/TheMikeWebbTea1" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
                         <FaTwitter />
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCEokNcwc-U5-nNHx7BeMvLw" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
+                    </Link>
+                    <Link href="https://www.youtube.com/channel/UCEokNcwc-U5-nNHx7BeMvLw" target="_blank" rel="noopener noreferrer" className="text-white text-2xl hover:text-gray-300">
                         <FaYoutube />
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>
