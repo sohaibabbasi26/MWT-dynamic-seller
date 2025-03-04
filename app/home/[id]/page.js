@@ -102,13 +102,13 @@ const HomePage = () => {
 
         <div className="flex gap-2 justify-start items-center max-sm:justify-center">
             <div>
-                <span className="text-orangeBack font-redhat font-semibold max-sm:text-center">
+                <Link target="_blank" href="https://mikeandclaudiawebb.com/lss" className="text-orangeBack font-redhat font-semibold max-sm:text-center text-center">
                     Visit Properties
-                </span>
+                </Link>
             </div>
 
             <div>
-                <Image className="h-[15px   ]" src="/icons/right-arrow.png" width={20} height={5} alt="right-arrow" />
+                <Image className="h-[15px]" src="/icons/right-arrow.png" width={20} height={5} alt="right-arrow" />
             </div>
         </div>
 
