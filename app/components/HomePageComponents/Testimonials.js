@@ -28,7 +28,7 @@ const Testimonials = ({data}) => {
 
     return (
         <>
-            <div className="h-[50vh] max-sm:h-auto max-sm:py-5 w-full flex justify-center font-redhat">
+            <div className="min-h-[50vh] my-[2rem] max-sm:h-auto max-sm:py-5 w-full flex justify-center items-center font-redhat">
 
                 <div className="flex w-[90%] h-full my-[1rem] max-sm:mt-0 justify-center items-center max-sm:flex-col">
                     <div className="w-[50%] max-sm:w-[100%] h-full flex items-center max-sm:p-0 pl-10 max-sm:mb-2">
@@ -38,7 +38,7 @@ const Testimonials = ({data}) => {
                     <Swiper
                         pagination={{ clickable: true }}
                         modules={[Pagination, Navigation, Autoplay]}
-                        className="mySwiper rounded-2xl w-[40%] flex justify-center max-sm:w-[100%]"
+                        className="mySwiper rounded-2xl w-[40%]  flex justify-center max-sm:w-[100%]"
                         autoplay={{
                             delay: 2000,
                             disableOnInteraction: false,
@@ -48,7 +48,7 @@ const Testimonials = ({data}) => {
                         loopFillGroupWithBlank={true}   
                     >
                         {data?.reviews?.map((src, index) => (
-                            <SwiperSlide key={index} className="flex justify-center w-full overflow-hidden items-center rounded-2xl">
+                            <SwiperSlide key={index} className="flex justify-center h-full w-full overflow-hidden items-center rounded-2xl">
                                 <ReviewCard rating={src.rating} name={src.name} description={src.comment} role={src.role} />
                             </SwiperSlide>
                         ))}
