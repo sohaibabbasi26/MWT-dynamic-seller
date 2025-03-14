@@ -187,7 +187,7 @@ const IndividualListing = () => {
             console.log("[DATA FROM THE SERVER]:", data);
             if (data?.status === 200) {
                 setFirstResponse(true);
-                setListingUrl(`https://dynamic-seller.vercel.app/home/${id}`);
+                setListingUrl(`https://www.bestnovahomefinder.com/home/${id}`);
             }
             return;
         } catch (err) {
