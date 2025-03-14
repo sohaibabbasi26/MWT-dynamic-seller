@@ -31,7 +31,7 @@ const ListingDetails = ({ features, contactFormHeader, uploaded_image }) => {
 
     return (
         <>
-            <div className="h-[80vh] max-sm:h-auto w-full flex justify-center">
+            <div className="h-[75vh] max-sm:h-auto w-full flex justify-center">
                 <div className="my-5 w-[95%] bg-blueBack rounded-3xl flex max-sm:flex-col justify-between overflow-hidden font-redhat">
                     <div className="w-[50%] max-sm:w-[100%] max-sm:px-[2rem] py-[4rem] max-sm:py-[2rem] px-[4rem] flex flex-col justify-between">
                         <h2 className="text-[2rem] font-redhat max-sm:text-center max-sm:pb-3 max-sm:text-[1.5rem] text-white">
@@ -88,7 +88,7 @@ const ListingDetails = ({ features, contactFormHeader, uploaded_image }) => {
 
                     <div className="w-[50%] p-[2rem] h-full max-sm:w-[100%] max-sm:pt-0">
                         <div className=" h-full ">
-                            <Image className="h-full w-full rounded-xl" src={uploaded_image} height={200} width={200} />
+                            <Image className="h-full w-full rounded-xl" src={uploaded_image} height={1000} width={1000} />
                         </div>
                     </div>
                 </div>
