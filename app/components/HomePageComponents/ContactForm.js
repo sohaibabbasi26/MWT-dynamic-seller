@@ -137,12 +137,12 @@ const ContactForm = () => {
                         THE MIKE WEBB TEAM
                     </h2>
 
-                    <p className="text-sm max-sm:text-center text-white">
+                    <p className="text-sm max-sm:text-center w-[90%] text-white">
                         The Mike Webb Team offers a comprehensive and expert approach to real estate listings. Whether you're selling your first home or managing multiple properties, our team provides tailored strategies to ensure maximum visibility and engagement for your listings. We combine market insights, professional photography, and innovative marketing techniques to attract the right buyers and achieve optimal sale prices. Trust The Mike Webb Team to guide you through a seamless and successful listing experience.
                     </p>
-
-                    <div className="w-full h-[80%] rounded-2xl overflow-hidden">
-                        <Link target="_blank" href="https://www.google.com/maps/place/The+Mike+Webb+Team,+LLC+%7C+Mike+and+Claudia+Webb,+REALTORS+%7C+RE%2FMAX+Allegiance+%7C+VA,+MD,+DC/@38.846222,-77.1237549,15.98z/data=!3m1!5s0x89b7b41daf2f508f:0x508faa029328b837!4m6!3m5!1s0x89b7b39aca50d80d:0x1c21b9c2277b7b38!8m2!3d38.845551!4d-77.115142!16s%2Fg%2F11f5p5qqyk?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D"><Image className="w-full h-full" src={Map} width={200} height={2 - 0} /></Link>
+                    
+                    <div className="w-[80%] h-[80%] rounded-2xl overflow-hidden">
+                        <Link target="_blank" href="https://www.google.com/maps/place/The+Mike+Webb+Team,+LLC+%7C+Mike+and+Claudia+Webb,+REALTORS+%7C+RE%2FMAX+Allegiance+%7C+VA,+MD,+DC/@38.846222,-77.1237549,15.98z/data=!3m1!5s0x89b7b41daf2f508f:0x508faa029328b837!4m6!3m5!1s0x89b7b39aca50d80d:0x1c21b9c2277b7b38!8m2!3d38.845551!4d-77.115142!16s%2Fg%2F11f5p5qqyk?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D"><Image className="w-full h-full" src={Map} width={3000} height={3000} /></Link>
                     </div>
                 </div>
 
