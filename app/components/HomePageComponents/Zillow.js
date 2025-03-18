@@ -1,7 +1,7 @@
 import Image from "next/image";
 import GraphaSection from "./Graphs";
 
-const Zillow = ({ saves, location, zillowViews }) => {
+const Zillow = ({visitZillow, zillowGraph, saves, location, zillowViews }) => {
 
     const radialData = [
         { name: "Views", value: zillowViews, fill: "#F68323" },
@@ -24,7 +24,7 @@ const Zillow = ({ saves, location, zillowViews }) => {
                     <div className="flex flex-col max-sm:gap-[0rem] gap-[1rem] max-sm:items-center items-center w-[20%] max-sm:w-[100%] max-sm:flex-col">
 
                         <div className="w-[100%] mt-[2rem] h-full max-sm:w-[100%]  bg-blueBack rounded-3xl px-8 flex flex-col items-center justify-between max-sm:flex-col max-sm:h-full">
-                            <div className="py-8 h-full flex flex-col justify-between max-sm:items-center">
+                            <div className="py-8 h-[50%] flex flex-col  max-sm:items-center">
                                 <div className="flex flex-col items-center gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
                                     <p className="font-redhat text-3xl max-sm:text-xl max-sm:font-semibold text-white">
                                         {zillowViews}
@@ -38,10 +38,10 @@ const Zillow = ({ saves, location, zillowViews }) => {
                                 </p>
                             </div>
 
-                            <div className="py-8 h-full flex flex-col justify-between max-sm:items-center">
+                            <div className="py-8 h-[50%] flex flex-col max-sm:items-center">
                                 <div className="flex flex-col items-center gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
                                     <p className="font-redhat text-3xl max-sm:text-xl max-sm:font-semibold text-white">
-                                        {saves}
+                                        {saves} 
                                     </p>
 
                                     <Image src="/Group.png" className="h-[50px] w-[50px] max-sm:h-[40px] max-sm:w-[40px]" height={20} width={20} />
@@ -54,8 +54,8 @@ const Zillow = ({ saves, location, zillowViews }) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[50%] max-sm:w-[100%] max-sm:flex-col">
-                        <GraphaSection h={200} w={400} heading="Zillow Views" isComponent={true} views={zillowViews} displayBtn={true} saves={saves}  />
+                    <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[100%] max-sm:w-[100%] max-sm:flex-col">
+                        <GraphaSection visitZillow={visitZillow} isZillow={true} h={200} w={400} heading="Zillow Views" isComponent={true} zillowGraph={zillowGraph} views={zillowViews} displayBtn={true} saves={saves}  />
                     </div>
                 </div>
 

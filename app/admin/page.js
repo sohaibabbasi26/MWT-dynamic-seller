@@ -23,11 +23,14 @@ const AdminPage = () => {
     const [brochureDescriptions, setBrochureDescriptions] = useState([]);
     const [brochureVideo, setBrochureVideo] = useState(null);
 
-
     const [formData, setFormData] = useState({
         location: "",
         description: "",
         visitors: 0,
+        visitZillowLink: "",
+        graphSectionEmbeddedLink: "",
+        zillowGraphSectionEmbeddedLink: "",
+        brightMLSgraphSectionEmbeddedLink: "",
         zillowViews: 0,
         mlsViews: 0,
         homesDotComViews: 0,
@@ -41,6 +44,7 @@ const AdminPage = () => {
         reviews: [{ name: "", rating: 0, comment: "" }],
         yt_link: "",
         address: "",
+        additionalPages: [{ heading: "", canvaLink: "" }]
     });
 
     const handleReviewChange = (index, field, value) => {
@@ -52,12 +56,28 @@ const AdminPage = () => {
         }));
     };
 
+    const handleAdditionalPageChange = (index, field, value) => {
+        const updatedAdditionalPages = [...formData.additionalPages];
+        updatedAdditionalPages[index][field] = value;
+        setFormData((prev) => ({
+            ...prev,
+            additionalPages: updatedAdditionalPages
+        }))
+    }
+
     const addReview = () => {
         setFormData((prev) => ({
             ...prev,
             reviews: [...prev.reviews, { name: "", rating: 0, comment: "" }],
         }));
     };
+
+    const addAdditionalPage = () => {
+        setFormData((prev) => ({
+            ...prev,
+            additionalPages: [...prev.additionalPages, { heading: "", canvaLink: "" }]
+        }))
+    }
 
     const removeReview = (index) => {
         const updatedReviews = [...formData.reviews];
@@ -67,6 +87,15 @@ const AdminPage = () => {
             reviews: updatedReviews,
         }));
     };
+
+    const removeAdditionalPage = (index) => {
+        const updatedAdditionalPages = [...formData.additionalPages];
+        updatedAdditionalPages.splice(index, 1);
+        setFormData((prev) => ({
+            ...prev,
+            additionalPages: updatedAdditionalPages
+        }))
+    }
 
     const submitInstaPostsForAutoGenerationOfViews = async () => {
         try {
@@ -524,6 +553,46 @@ const AdminPage = () => {
                         className="block w-full p-2 border rounded text-black"
                     />
 
+                    <h3 className="text-black font-semibold">Cumulative graph canva Link</h3>
+                    <input
+                        type="text"
+                        name="graphSectionEmbeddedLink"
+                        placeholder="Cumulative graph canva link"
+                        value={formData.graphSectionEmbeddedLink}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">Zillow graph canva Link</h3>
+                    <input
+                        type="text"
+                        name="zillowGraphSectionEmbeddedLink"
+                        placeholder="Zillow graph canva link"
+                        value={formData.zillowGraphSectionEmbeddedLink}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">BrightMLS graph canva Link</h3>
+                    <input
+                        type="text"
+                        name="brightMLSgraphSectionEmbeddedLink"
+                        placeholder="BrightMLS graph canva link"
+                        value={formData.brightMLSgraphSectionEmbeddedLink}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
+                    <h3 className="text-black font-semibold">"Visit Zillow" link</h3>
+                    <input
+                        type="text"
+                        name="visitZillowLink"
+                        placeholder="Visit Zillow Link"
+                        value={formData.visitZillowLink}
+                        onChange={handleChange}
+                        className="block w-full p-2 border rounded text-black"
+                    />
+
                     <h3 className="text-black font-semibold">Brochure Canva Link</h3>
                     <input
                         type="text"
@@ -534,15 +603,6 @@ const AdminPage = () => {
                         className="block w-full p-2 border rounded text-black"
                     />
 
-                    {/* <h3 className="text-black font-semibold">Visitors</h3>
-                    <input
-                        type="number"
-                        name="visitors"
-                        placeholder="Visitors"
-                        value={formData.visitors}
-                        onChange={handleChange}
-                        className="block w-full p-2 border rounded text-black"
-                    /> */}
                     <h3 className="text-black font-semibold">Zillow Views</h3>
                     <input
                         type="number"
@@ -656,6 +716,52 @@ const AdminPage = () => {
                             onChange={(e) => handleFeatureChange(e, "address")}
                             className="block w-full p-2 border rounded text-black"
                         />
+
+                        <div className="space-y-3">
+                            <h3 className="text-lg font-semibold text-black">Additional Pages</h3>
+
+                            {formData.additionalPages.map((page, index) => (
+                                <div key={index} className="border p-4 rounded mb-4">
+                                    <h4 className="text-md font-semibold text-black">Page {index + 1}</h4>
+
+                                    <label className="text-black">Heading</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Enter heading"
+                                        value={page.heading}
+                                        onChange={(e) => handleAdditionalPageChange(index, "heading", e.target.value)}
+                                        className="block w-full p-2 border rounded text-black mb-2"
+                                    />
+
+                                    <label className="text-black">Canva Link</label>
+                                    <input
+                                        type="url"
+                                        placeholder="Enter Canva Link"
+                                        value={page.canvaLink}
+                                        onChange={(e) => handleAdditionalPageChange(index, "canvaLink", e.target.value)}
+                                        className="block w-full p-2 border rounded text-black mb-2"
+                                    />
+
+                                    {formData.additionalPages.length > 1 && (
+                                        <button
+                                            type="button"
+                                            onClick={() => removeAdditionalPage(index)}
+                                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                        >
+                                            Remove Page
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+
+                            <button
+                                type="button"
+                                onClick={addAdditionalPage}
+                                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                            >
+                                Add Page
+                            </button>
+                        </div>
 
                         <div className="space-y-3">
                             <h3 className="text-lg font-semibold text-black">Reviews</h3>

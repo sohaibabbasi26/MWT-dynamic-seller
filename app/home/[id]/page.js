@@ -19,6 +19,7 @@ import { setListing } from "@/app/redux/slices/listingSlice";
 import Link from "next/link";
 import Brochure from "@/app/components/HomePageComponents/Brochure";
 import BrochureSlider from "@/app/components/HomePageComponents/Brochure";
+import AdditionalPagesSection from "@/app/components/HomePageComponents/AdditionalDynamicSection";
 // import PropertyBrochure from "@/app/components/HomePageComponents/Brochure";
 
 const HomePage = () => {
@@ -169,7 +170,7 @@ const HomePage = () => {
 
         <div className="flex justify-start w-full h-full gap-[1rem]">
             <div className="flex flex-col gap-[1rem] max-sm:items-center items-start w-[100%] max-sm:w-[100%] max-sm:flex-col">
-                <GraphaSection displayBtn={false} h={150} w={300} heading="Bright MLS Views" isComponent={true} views={data?.mlsViews} saves={2} />
+                <GraphaSection zillowGraph={data?.brightMLSgraphSectionEmbeddedLink} visitZillow={data?.visitZillowLink} displayBtn={false} h={150} w={300} heading="Bright MLS Views" isComponent={true} views={data?.mlsViews} saves={2} />
             </div>
         </div>
 
@@ -201,7 +202,7 @@ const HomePage = () => {
 
             <div className="w-full flex justify-center">
                 <div className="w-[95%]">
-                    <GraphaSection isSection={true} h={200} w={400} isComponent={false} heading="Over All Views" views={data?.views || 0} saves={data?.saves || 0} displayBtn={false} />
+                    <GraphaSection visitZillow={data?.visitZillowLink} zillowGraph={data?.graphSectionEmbeddedLink} isSection={true} h={200} w={400} isComponent={false} heading="Over All Views" views={data?.views || 0} saves={data?.saves || 0} displayBtn={false} />
                 </div>
             </div>
 
@@ -214,7 +215,7 @@ const HomePage = () => {
                 location={data?.location}
             />
 
-            <Zillow zillowViews={data?.zillowViews} saves={data?.saves} location={data?.location} />
+            <Zillow visitZillow={data?.visitZillowLink} zillowGraph={data?.zillowGraphSectionEmbeddedLink} zillowViews={data?.zillowViews} saves={data?.saves} location={data?.location} />
 
             <DynamicVideoContent
                 isLeftFlow={true}
@@ -239,6 +240,16 @@ const HomePage = () => {
             />
 
             <ContactForm />
+
+            {data?.additionalPages?.length > 0 ? (
+                <>
+                    {data?.additionalPages?.map((page) => {
+                        return <AdditionalPagesSection page={page} />
+                    })}
+                </>
+            ) : (
+                <></>
+            )}
 
             <Testimonials data={data} />
 
