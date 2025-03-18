@@ -701,11 +701,11 @@ const IndividualListing = () => {
                             />
 
 <div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-black">Additional Pages</h3>
+                            <h3 className="text-lg font-semibold text-black">Additional Sections</h3>
 
                             {formData.additionalPages.map((page, index) => (
                                 <div key={index} className="border p-4 rounded mb-4">
-                                    <h4 className="text-md font-semibold text-black">Page {index + 1}</h4>
+                                    <h4 className="text-md font-semibold text-black">Section {index + 1}</h4>
 
                                     <label className="text-black">Heading</label>
                                     <input
