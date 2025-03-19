@@ -523,45 +523,45 @@ const IndividualListing = () => {
                             className="block w-full p-2 border rounded text-black"
                         />
 
-<h3 className="text-black font-semibold">Cumulative graph canva Link</h3>
-                    <input
-                        type="text"
-                        name="graphSectionEmbeddedLink"
-                        placeholder="Cumulative graph canva link"
-                        value={formData.graphSectionEmbeddedLink}
-                        onChange={handleChange}
-                        className="block w-full p-2 border rounded text-black"
-                    />
+                        <h3 className="text-black font-semibold">Cumulative graph canva Link</h3>
+                        <input
+                            type="text"
+                            name="graphSectionEmbeddedLink"
+                            placeholder="Cumulative graph canva link"
+                            value={formData.graphSectionEmbeddedLink}
+                            onChange={handleChange}
+                            className="block w-full p-2 border rounded text-black"
+                        />
 
-                    <h3 className="text-black font-semibold">Zillow graph canva Link</h3>
-                    <input
-                        type="text"
-                        name="zillowGraphSectionEmbeddedLink"
-                        placeholder="Zillow graph canva link"
-                        value={formData.zillowGraphSectionEmbeddedLink}
-                        onChange={handleChange}
-                        className="block w-full p-2 border rounded text-black"
-                    />
+                        <h3 className="text-black font-semibold">Zillow graph canva Link</h3>
+                        <input
+                            type="text"
+                            name="zillowGraphSectionEmbeddedLink"
+                            placeholder="Zillow graph canva link"
+                            value={formData.zillowGraphSectionEmbeddedLink}
+                            onChange={handleChange}
+                            className="block w-full p-2 border rounded text-black"
+                        />
 
-                    <h3 className="text-black font-semibold">BrightMLS graph canva Link</h3>
-                    <input
-                        type="text"
-                        name="brightMLSgraphSectionEmbeddedLink"
-                        placeholder="BrightMLS graph canva link"
-                        value={formData.brightMLSgraphSectionEmbeddedLink}
-                        onChange={handleChange}
-                        className="block w-full p-2 border rounded text-black"
-                    />
+                        <h3 className="text-black font-semibold">BrightMLS graph canva Link</h3>
+                        <input
+                            type="text"
+                            name="brightMLSgraphSectionEmbeddedLink"
+                            placeholder="BrightMLS graph canva link"
+                            value={formData.brightMLSgraphSectionEmbeddedLink}
+                            onChange={handleChange}
+                            className="block w-full p-2 border rounded text-black"
+                        />
 
-                    <h3 className="text-black font-semibold">"Visit Zillow" link</h3>
-                    <input
-                        type="text"
-                        name="visitZillowLink"
-                        placeholder="Visit Zillow Link"
-                        value={formData.visitZillowLink}
-                        onChange={handleChange}
-                        className="block w-full p-2 border rounded text-black"
-                    />
+                        <h3 className="text-black font-semibold">"Visit Zillow" link</h3>
+                        <input
+                            type="text"
+                            name="visitZillowLink"
+                            placeholder="Visit Zillow Link"
+                            value={formData.visitZillowLink}
+                            onChange={handleChange}
+                            className="block w-full p-2 border rounded text-black"
+                        />
 
 
                         <h3 className="text-black font-semibold">Brochure Canva Link</h3>
@@ -700,51 +700,51 @@ const IndividualListing = () => {
                                 className="block w-full p-2 border rounded text-black"
                             />
 
-<div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-black">Additional Sections</h3>
+                            <div className="space-y-3">
+                                <h3 className="text-lg font-semibold text-black">Additional Sections</h3>
 
-                            {formData.additionalPages.map((page, index) => (
-                                <div key={index} className="border p-4 rounded mb-4">
-                                    <h4 className="text-md font-semibold text-black">Section {index + 1}</h4>
+                                {formData.additionalPages.map((page, index) => (
+                                    <div key={index} className="border p-4 rounded mb-4">
+                                        <h4 className="text-md font-semibold text-black">Section {index + 1}</h4>
 
-                                    <label className="text-black">Heading</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter heading"
-                                        value={page.heading}
-                                        onChange={(e) => handleAdditionalPageChange(index, "heading", e.target.value)}
-                                        className="block w-full p-2 border rounded text-black mb-2"
-                                    />
+                                        <label className="text-black">Heading</label>
+                                        <input
+                                            type="text"
+                                            placeholder="Enter heading"
+                                            value={page.heading}
+                                            onChange={(e) => handleAdditionalPageChange(index, "heading", e.target.value)}
+                                            className="block w-full p-2 border rounded text-black mb-2"
+                                        />
 
-                                    <label className="text-black">Canva Link</label>
-                                    <input
-                                        type="url"
-                                        placeholder="Enter Canva Link"
-                                        value={page.canvaLink}
-                                        onChange={(e) => handleAdditionalPageChange(index, "canvaLink", e.target.value)}
-                                        className="block w-full p-2 border rounded text-black mb-2"
-                                    />
+                                        <label className="text-black">Canva Link</label>
+                                        <input
+                                            type="url"
+                                            placeholder="Enter Canva Link"
+                                            value={page.canvaLink}
+                                            onChange={(e) => handleAdditionalPageChange(index, "canvaLink", e.target.value)}
+                                            className="block w-full p-2 border rounded text-black mb-2"
+                                        />
 
-                                    {formData.additionalPages.length > 1 && (
-                                        <button
-                                            type="button"
-                                            onClick={() => removeAdditionalPage(index)}
-                                            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                        >
-                                            Remove Page
-                                        </button>
-                                    )}
-                                </div>
-                            ))}
+                                        {formData.additionalPages.length > 1 && (
+                                            <button
+                                                type="button"
+                                                onClick={() => removeAdditionalPage(index)}
+                                                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                            >
+                                                Remove Page
+                                            </button>
+                                        )}
+                                    </div>
+                                ))}
 
-                            <button
-                                type="button"
-                                onClick={addAdditionalPage}
-                                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                            >
-                                Add Page
-                            </button>
-                        </div>
+                                <button
+                                    type="button"
+                                    onClick={addAdditionalPage}
+                                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                                >
+                                    Add Page
+                                </button>
+                            </div>
 
 
                             <div className="space-y-3">
@@ -1008,16 +1008,16 @@ const IndividualListing = () => {
                                     <h1 className="text-3xl font-bold mb-4 text-black">SELECT FACEBOOK POSTS:</h1>
                                     {fbPosts?.length > 0 && (
                                         <>
-                                             {fbPosts?.map((post, index) => (
-                                            <div onClick={() => toggleFbPostSelection(post)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
+                                            {fbPosts?.map((post, index) => (
+                                                <div onClick={() => toggleFbPostSelection(post)} key={index} className={`max-sm:w-[100%] p-4 border-2 min-h-[20vh] w-[30%] rounded-2xl cursor-pointer transition-all
                                                 ${selectedFbPostIds.some((selectedPost) => selectedPost.id === post.id) ? "border-blue-500 bg-blue-100" : "border-black"}`}>
-                                                <div className="mb-[1rem]">
-                                                    <span className="text-black font-xl font-bold ">POSTED ON:</span>
-                                                    <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.created_time)}</span>
+                                                    <div className="mb-[1rem]">
+                                                        <span className="text-black font-xl font-bold ">POSTED ON:</span>
+                                                        <span className="text-black font-xl">{formatDateToDDMMYYYY(post?.created_time)}</span>
+                                                    </div>
+                                                    <p className="text-sm text-black line-clamp-3">{post?.message}</p>
                                                 </div>
-                                                <p className="text-sm text-black line-clamp-3">{post?.message}</p>
-                                            </div>
-                                        ))}
+                                            ))}
                                         </>
                                     )}
 

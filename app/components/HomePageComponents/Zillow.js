@@ -54,7 +54,7 @@ const Zillow = ({visitZillow, zillowGraph, saves, location, zillowViews }) => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[100%] max-sm:w-[100%] max-sm:flex-col">
+                    <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[50%] max-sm:w-[100%] max-sm:flex-col">
                         <GraphaSection visitZillow={visitZillow} isZillow={true} h={200} w={400} heading="Zillow Views" isComponent={true} zillowGraph={zillowGraph} views={zillowViews} displayBtn={true} saves={saves}  />
                     </div>
                 </div>
