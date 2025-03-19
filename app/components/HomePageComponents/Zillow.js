@@ -1,13 +1,14 @@
 import Image from "next/image";
 import GraphaSection from "./Graphs";
+import Link from "next/link";
 
-const Zillow = ({visitZillow, zillowGraph, saves, location, zillowViews }) => {
+const Zillow = ({ visitZillow, zillowGraph, saves, location, zillowViews }) => {
 
     const radialData = [
         { name: "Views", value: zillowViews, fill: "#F68323" },
     ];
 
-    
+
     return (
         <>
             <div className="w-full h-auto max-sm:my-[0.5rem] my-[2rem] flex flex-col gap-[1rem] justify-center items-center max-sm:h-auto">
@@ -19,6 +20,14 @@ const Zillow = ({visitZillow, zillowGraph, saves, location, zillowViews }) => {
                     Zillow's platform includes a vast database of homes, along with features like Zestimate, which estimates property values, and mortgage calculators to assist with financial planning
                     <span className="text-orangeBack"> {location} </span> by The Mike Webb Team
                 </p>
+
+                {visitZillow ? (
+                    <>
+                        <div className="w-[100%] max-sm:w-[90%] max-sm:mb-[1rem] flex justify-center mt-[1rem]">
+                            <Link target="_blank" href={visitZillow} className="py-3 px-6 text-center w-[10%] bg-orangeBack text-blueBack rounded-xl font-redhat max-sm:w-[100%]">Visit Zillow</Link>
+                        </div>
+                    </>
+                ) : (<></>)}
 
                 <div className="flex justify-center gap-[3rem] w-[90%] max-sm:flex-col">
                     <div className="flex flex-col max-sm:gap-[0rem] gap-[1rem] max-sm:items-center items-center w-[20%] max-sm:w-[100%] max-sm:flex-col">
@@ -41,7 +50,7 @@ const Zillow = ({visitZillow, zillowGraph, saves, location, zillowViews }) => {
                             <div className="py-8 h-[50%] flex flex-col max-sm:items-center">
                                 <div className="flex flex-col items-center gap-[0.5rem] max-sm:flex-col max-sm:justify-center">
                                     <p className="font-redhat text-3xl max-sm:text-xl max-sm:font-semibold text-white">
-                                        {saves} 
+                                        {saves}
                                     </p>
 
                                     <Image src="/Group.png" className="h-[50px] w-[50px] max-sm:h-[40px] max-sm:w-[40px]" height={20} width={20} />
@@ -55,7 +64,7 @@ const Zillow = ({visitZillow, zillowGraph, saves, location, zillowViews }) => {
                     </div>
 
                     <div className="flex flex-col gap-[1rem] max-sm:items-center items-center w-[50%] max-sm:w-[100%] max-sm:flex-col">
-                        <GraphaSection visitZillow={visitZillow} isZillow={true} h={200} w={400} heading="Zillow Views" isComponent={true} zillowGraph={zillowGraph} views={zillowViews} displayBtn={true} saves={saves}  />
+                        <GraphaSection visitZillow={visitZillow} isZillow={true} h={200} w={400} heading="Zillow Views" isComponent={true} zillowGraph={zillowGraph} views={zillowViews} displayBtn={true} saves={saves} />
                     </div>
                 </div>
 

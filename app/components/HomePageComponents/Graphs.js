@@ -40,10 +40,14 @@ const GraphaSection = ({ isZillow, visitZillow, zillowGraph, isSection, views, s
 
     return (
         <>
-            <section id="marketingM" className={`h-auto ${isSection ? "max-sm:mt-[2rem]" : "max-sm:mt-0"} mt-[2rem] max-sm:h-auto w-full flex gap-4 px- font-redhat max-sm:flex-col `}>
+            <section id="marketingM" className={`h-auto ${isSection ? "max-sm:mt-[2rem]" : "max-sm:mt-0"} mt-[2rem] max-sm:h-auto ${isSection ? 'w-[50%]' : 'w-full'} flex gap-4 px- font-redhat max-sm:flex-col `}>
 
-                <div className={`bg-blueBack ${isComponent ? "py-[1rem]" : "p-[2rem]"}  w-[100%] h-[40rem] max-sm:w-auto flex flex-col justify-center items-center rounded-3xl `}>
-                    <h3 className="font-redhat text-2xl font-semibold max-sm:text-center text-white">{heading}</h3>
+                <div className={`bg-blueBack ${isComponent ? "py-[1rem]" : "p-[2rem]"}  w-[100%] h-[30rem] max-sm:w-auto flex flex-col justify-center items-center rounded-3xl `}>
+                    {isComponent ? (
+                        <></>
+                    ) : (
+                        <h3 className="font-redhat text-2xl font-semibold max-sm:text-center text-white">{heading}</h3>
+                    )}
                     {isSection ? (<>
                         <div className="relative">
                             <RadialBarChart
@@ -73,46 +77,34 @@ const GraphaSection = ({ isZillow, visitZillow, zillowGraph, isSection, views, s
                             </div>
                         </div>
                     </>) : (<>
-                        {visitZillow && isZillow ? (
-                            <>
-                                <div className="w-[100%] max-sm:w-[90%] max-sm:mb-[1rem] flex justify-center mt-[1rem]">
-                                    <Link target="_blank" href={visitZillow} className="py-3 px-6 text-center w-[40%] bg-orangeBack text-blueBack rounded-xl font-redhat max-sm:w-[100%]">Visit Zillow</Link>
-                                </div>
-                            </>
-                        ) : (<></>)}
+
                         <iframe
                             src={zillowGraph}
                             className="w-full h-[1000px] rounded-2xl border-none mt-4"
                             allowFullScreen
                         ></iframe>
 
-                        
-
-
                     </>)}
 
                     <div className="text-white mt-4 text-center flex flex-col items-center">
-                            {
-                                isSection ? (<><div className="flex gap-2">
-                                    <p className={` ${isSection ? "text-[1.5rem]" : ""}`}>
-                                        <span className={`text-orangeBack ${isSection ? "text-[2rem]" : ""} font-semibold`}>{views}</span> Views
-                                    </p>
-                                </div></>) : (<></>)
-                            }
-                            {
-                                isComponent ? (
-                                    <>
-                                        <p className={`mt-2 font-bold text-white ${isSection ? "text-[1.5rem]" : ""}`}>
-                                            {date}
-                                        </p>
-                                    </>
-                                ) : (
-                                    <><p className={`mt-2 font-bold text-white ${isSection ? "text-[1.5rem]" : ""}`}>
-                                        {views} Views of {date}
-                                    </p></>
-                                )
-                            }
-                        </div>
+                        {
+                            isSection ? (<><div className="flex gap-2">
+                                <p className={` ${isSection ? "text-[1.5rem]" : ""}`}>
+                                    <span className={`text-orangeBack ${isSection ? "text-[2rem]" : ""} font-semibold`}>{views}</span> Views
+                                </p>
+                            </div></>) : (<></>)
+                        }
+                        {
+                            isComponent ? (
+                                <>
+                                </>
+                            ) : (
+                                <><p className={`mt-2 font-bold text-white ${isSection ? "text-[1.5rem]" : ""}`}>
+                                    {views} Views of {date}
+                                </p></>
+                            )
+                        }
+                    </div>
                 </div>
 
 

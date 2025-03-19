@@ -201,7 +201,7 @@ const HomePage = () => {
             />
 
             <div className="w-full flex justify-center">
-                <div className="w-[95%]">
+                <div className="w-[95%] flex justify-center">
                     <GraphaSection visitZillow={data?.visitZillowLink} zillowGraph={data?.graphSectionEmbeddedLink} isSection={true} h={200} w={400} isComponent={false} heading="Over All Views" views={data?.views || 0} saves={data?.saves || 0} displayBtn={false} />
                 </div>
             </div>
@@ -243,8 +243,8 @@ const HomePage = () => {
 
             {data?.additionalPages?.length > 0 ? (
                 <>
-                    {data?.additionalPages?.map((page) => {
-                        return <AdditionalPagesSection page={page} />
+                    {data?.additionalPages?.map((page, index) => {
+                        return <AdditionalPagesSection key={index} page={page} />
                     })}
                 </>
             ) : (

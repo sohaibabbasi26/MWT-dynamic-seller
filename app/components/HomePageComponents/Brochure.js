@@ -8,12 +8,22 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 const BrochureSlider = ({ location, canvaLink }) => {
   const videoRef = useRef(null);
 
+  function cutAfterFirstComma(text) {
+    return text.split(',', 1)[0];
+}
+
   return (
     <div className='w-full flex flex-col items-center'>
 
-      <h2 className='font-redhat text-[2rem] mt-[2rem] font-bold text-black max-sm:text-[1rem]'>
-        Experience {location}
+      <h2 className='font-redhat text-[2rem] mt-[2rem] font-bold text-blueBack max-sm:text-[1rem]'>
+        Experience {cutAfterFirstComma(location)}
       </h2>
+
+      <p className='text-black font-redhat text-center w-[80%] font-semibold'>
+        The text content from the image is as follows:
+        EXPERIENCE 3487 S UTAH ST S
+        This feature includes pictures and videos, providing an immersive experience that showcases the unique features and qualities of your property to potential buyers. The stunning visuals and compelling narratives combined offer buyers a comprehensive and interactive way to explore your property.
+      </p>
 
       <div className="w-[90%] relative mt-[2rem] h-full justify-center flex items-center max-sm:items-center max-sm:max-h-[40%] max-sm:w-[90%]">
         <Swiper
