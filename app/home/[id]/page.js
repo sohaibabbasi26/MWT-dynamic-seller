@@ -241,7 +241,7 @@ const HomePage = () => {
 
             <ContactForm />
 
-            {data?.additionalPages?.length > 0 ? (
+            {data?.additionalPages[0]?.heading !== '' ? (
                 <>
                     {data?.additionalPages?.map((page, index) => {
                         return <AdditionalPagesSection key={index} page={page} />

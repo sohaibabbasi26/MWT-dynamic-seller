@@ -19,9 +19,7 @@ const BrochureSlider = ({ location, canvaLink }) => {
         Experience {cutAfterFirstComma(location)}
       </h2>
 
-      <p className='text-black font-redhat text-center w-[80%] font-semibold'>
-        The text content from the image is as follows:
-        EXPERIENCE 3487 S UTAH ST S
+      <p className='text-blueBack font-redhat text-center w-[80%] font-semibold'>
         This feature includes pictures and videos, providing an immersive experience that showcases the unique features and qualities of your property to potential buyers. The stunning visuals and compelling narratives combined offer buyers a comprehensive and interactive way to explore your property.
       </p>
 

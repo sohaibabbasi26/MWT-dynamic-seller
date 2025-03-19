@@ -42,7 +42,7 @@ const GraphaSection = ({ isZillow, visitZillow, zillowGraph, isSection, views, s
         <>
             <section id="marketingM" className={`h-auto ${isSection ? "max-sm:mt-[2rem]" : "max-sm:mt-0"} mt-[2rem] max-sm:h-auto ${isSection ? 'w-[50%]' : 'w-full'} flex gap-4 px- font-redhat max-sm:flex-col `}>
 
-                <div className={`bg-blueBack ${isComponent ? "py-[1rem]" : "p-[2rem]"}  w-[100%] h-[30rem] max-sm:w-auto flex flex-col justify-center items-center rounded-3xl `}>
+                <div className={`bg-blueBack ${isComponent ? "py-[1rem] h-[30rem]" : "p-[2rem] h-[25rem]"}  w-[100%]  max-sm:w-auto flex flex-col justify-center items-center rounded-3xl `}>
                     {isComponent ? (
                         <></>
                     ) : (
