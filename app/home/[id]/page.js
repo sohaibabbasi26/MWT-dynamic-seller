@@ -98,7 +98,7 @@ const HomePage = () => {
 
     const firstVidSectionContent = <>
         <p className="text-blueBack font-redhat text-sm font-semibold max-sm:text-center">
-            Access expert analysis, trends, sales data, and market insights through an informative video. We’re dedicated to maximizing the value of {data?.location} with a customized digital marketing strategy that reaches a broad network of potential buyers.
+            Gain valuable insights with expert analysis, market trends, sales data, and in-depth real estate insights presented in a comprehensive video. Our strategic digital marketing approach is designed to maximize the value of {data?.location}, ensuring broad exposure to a wide network of potential buyers.
         </p>
 
         <div className="flex gap-2 justify-start items-center max-sm:justify-center">
@@ -165,7 +165,7 @@ const HomePage = () => {
 
     const secondVidSectionContent = <>
         <p className="text-blueBack font-redhat max-sm:text-[16px] text-sm font-semibold max-sm:text-center mb-[1rem]">
-            BrightMLS provides a centralized platform where we list properties, access extensive property data, and collaborate with other agents to streamline buying and selling processes. It offers tools and resources to improve property marketing, ensure accurate listings, and enhance client service, ultimately making real estate transactions more efficient and transparent.
+            Bright MLS serves as a comprehensive, centralized platform for real estate professionals to list properties, access extensive market data, and collaborate with other agents. It offers advanced tools and resources designed to enhance property marketing, ensure listing accuracy, and elevate client service. By streamlining the buying and selling process, Bright MLS fosters great efficiency, transparency, and success in real estate transactions.
         </p>
 
         <div className="flex justify-start w-full h-full gap-[1rem]">

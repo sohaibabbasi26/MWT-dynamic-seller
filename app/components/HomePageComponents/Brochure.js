@@ -20,7 +20,7 @@ const BrochureSlider = ({ location, canvaLink }) => {
       </h2>
 
       <p className='text-blueBack font-redhat text-center w-[80%] font-semibold'>
-        This feature includes pictures and videos, providing an immersive experience that showcases the unique features and qualities of your property to potential buyers. The stunning visuals and compelling narratives combined offer buyers a comprehensive and interactive way to explore your property.
+        This feature includes high-quality photos and videos, creating an immersive experience that highlights your property's unique features and charm. With stunning visuals and engaging storytelling, buyers can explore your home in a dynamic and interactive way.
       </p>
 
       <div className="w-[90%] relative mt-[2rem] h-full justify-center flex items-center max-sm:items-center max-sm:max-h-[40%] max-sm:w-[90%]">
