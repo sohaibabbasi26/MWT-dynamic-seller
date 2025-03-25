@@ -16,7 +16,6 @@ const Zillow = ({ visitZillow, zillowGraph, saves, location, zillowViews }) => {
 
                 <p className="text-blueBack text-center w-[80%] font-redhat font-semibold">
                     Zillow is a premier online real estate marketplace that equips users with essential tools for buying, selling and renting properties. The platform provides extensive data on property values, neighborhood, insights and market trends, enabing customers to make well-informed estate decisions. With a comprehensive database of homes, Zillow features tools such as the Zestimate for property value estimates and mortgage calculators to support financial planning.
-                    <span className="text-orangeBack"> {location} </span> by The Mike Webb Team
                 </p>
 
                 {visitZillow ? (
